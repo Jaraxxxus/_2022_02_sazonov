@@ -2,7 +2,6 @@ package src.cft.shift;
 import java.io.IOException;
 
 
-
 public class task1 {
     int mult = 1;
     int tableSize = 0;
@@ -48,34 +47,31 @@ int findLength(int num)
     void createDelimiter()
     {
         StringBuilder buf = new StringBuilder();
-        int i = multLength;
-        while(i!=0)
-        {
-            buf.append("-");
-            i--;
-        }
+        buf.append("-".repeat(Math.max(0, multLength)));
 
-        for (i = 0 ;i < tableSize; ++i)
+
+        for (int i = 0 ;i < tableSize; ++i)
         {
-            buf.append("+");
-            buf.append("-".repeat(Math.max(0, fieldLength)));
+            buf.append("+").append("-".repeat(Math.max(0, fieldLength)));
         }
         delimitr = buf.toString();
 
     }
+
+
     void editField(int i)
     {
         int spaceLength = multLength - findLength(i) ;
         curBuf.append(" ".repeat(Math.max(0, spaceLength))).append(curNum);
     }
+
+
     void fillTable()
     {
         for (int i = 0 ;i < tableSize; ++i)
         {
-            curBuf.append("|");
-            int spaceLength = fieldLength - findLength(curNum) ;
-            curBuf.append(" ".repeat(Math.max(0, spaceLength)));
-            curBuf.append(curNum);
+            int spaceLength = fieldLength - findLength(curNum);
+            curBuf.append("|").append(" ".repeat(Math.max(0, spaceLength))).append(curNum);
             curNum+=mult;
         }
 
