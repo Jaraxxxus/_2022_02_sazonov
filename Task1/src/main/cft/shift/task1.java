@@ -19,17 +19,6 @@ public class task1 {
     }
 
 
-
-private int findLength(int num)
-{
-    int res = 0;
-    while (num!=0)
-    {
-        num = num/10;
-        ++res;
-    }
-    return res;
-}
     private void run() {
         System.out.println("Введите размер поля");
         try {
@@ -48,6 +37,27 @@ private int findLength(int num)
 
 
     }
+
+
+
+    private void printTable()
+    {
+        editField();
+        fillBuf();
+        System.out.println(curBuf);
+        System.out.println(delimitr);
+
+        while(mult<tableSize)
+        {
+            curBuf = "";
+            editField(mult);
+            fillBuf();
+            mult++;
+            System.out.println(curBuf);
+            System.out.println(delimitr);
+        }
+    }
+
     private void createDelimiter()
     {
         StringBuilder buf = new StringBuilder();
@@ -60,6 +70,17 @@ private int findLength(int num)
         }
         delimitr = buf.toString();
 
+    }
+
+    private int findLength(int num)
+    {
+        int res = 0;
+        while (num!=0)
+        {
+            num = num/10;
+            ++res;
+        }
+        return res;
     }
 
 
@@ -84,23 +105,7 @@ private int findLength(int num)
         }
 
     }
-    private void printTable()
-    {
-        editField();
-        fillBuf();
-        System.out.println(curBuf);
-        System.out.println(delimitr);
 
-        while(mult<tableSize)
-        {
-            curBuf = "";
-            editField(mult);
-            fillBuf();
-            mult++;
-            System.out.println(curBuf);
-            System.out.println(delimitr);
-        }
-    }
 
 
 }
