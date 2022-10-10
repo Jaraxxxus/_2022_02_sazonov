@@ -1,17 +1,16 @@
 package com.example.task1;
-import java.io.IOException;
 import java.util.Scanner;
 
 
 public class task1 {
-    int curNum = 1;
+
     int mult = 1;
     int tableSize = 0;
     int multLength = 0;
     int fieldLength = 0;
 
 
-    String delimitr;
+    String delimiter;
     StringBuilder curBuf = new StringBuilder();
     task1()
     {
@@ -23,13 +22,25 @@ public class task1 {
 
 
     private void run() {
-        System.out.println("Введите размер поля || vvedi");
+        System.out.println("enter the field size");
         Scanner in = new Scanner(System.in);
+        if (!in.hasNextInt())
+        {
+            System.out.println("That's not a number!");
+            in.close();
+            return;
+
+        }
         tableSize = in.nextInt();
         in.close();
+        if (tableSize<1)
+        {
+            System.out.println("negative number/zero detected");
+            return;
+        }
         multLength = findLength(tableSize);
         fieldLength = findLength(tableSize*tableSize);
-        createDelimiter();
+
         printTable();
 
 
@@ -52,7 +63,7 @@ public class task1 {
         {
             buf.append("+").append("-".repeat(Math.max(0, fieldLength)));
         }
-        delimitr = buf.toString();
+        delimiter = buf.toString();
 
     }
 
@@ -77,7 +88,7 @@ public class task1 {
     {
         curBuf.append(" ".repeat(Math.max(0, multLength)));
     }
-    private void fillBuf()
+    private void fillBuf(int curNum)
     {
         for (int i = 0 ;i < tableSize; ++i)
         {
@@ -89,21 +100,23 @@ public class task1 {
     }
     private void printTable()
     {
+
         editField();
-        fillBuf();
+        fillBuf(1);
         System.out.println(curBuf);
-        System.out.println(delimitr);
+        createDelimiter();
+        System.out.println(delimiter);
 
 
         while(mult<=tableSize)
         {
-            curNum = mult;
+
             curBuf.setLength(0);
             editField(mult);
-            fillBuf();
+            fillBuf(mult);
             mult++;
             System.out.println(curBuf);
-            System.out.println(delimitr);
+            System.out.println(delimiter);
         }
     }
 
