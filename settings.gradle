@@ -1,1 +1,3 @@
-rootProject.name = "_2022_02_Sazonov"
+rootProject.name = '_2022_02_Sazonov'
+include 'Task1'
+

@@ -1,4 +1,4 @@
-package com.example.task1;
+package cft.shift;
 import java.util.Scanner;
 
 
