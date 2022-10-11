@@ -19,9 +19,6 @@ public class task1 {
         this.run();
     }
 
-
-
-
     private void run() {
         System.out.println("enter the field size");
         Scanner in = new Scanner(System.in);
