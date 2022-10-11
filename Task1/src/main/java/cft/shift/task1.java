@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class task1 {
     private final int maxSize = 32;
 
-    int mult = 1;
-    int tableSize = 0;
-    int multLength = 0;
-    int fieldLength = 0;
+
+    private int mult = 1;
+    private int tableSize = 0;
+    private int multLength = 0;
+    private int fieldLength = 0;
 
 
-    String delimiter;
-    StringBuilder curBuf = new StringBuilder();
+    private String delimiter;
+    private final StringBuilder curBuf = new StringBuilder();
     task1()
     {
-
         this.run();
     }
 
@@ -60,7 +60,6 @@ public class task1 {
         StringBuilder buf = new StringBuilder();
         buf.append("-".repeat(Math.max(0, multLength)));
 
-
         for (int i = 0 ;i < tableSize; ++i)
         {
             buf.append("+").append("-".repeat(Math.max(0, fieldLength)));
@@ -102,17 +101,14 @@ public class task1 {
     }
     private void printTable()
     {
-
         editField();
         fillBuf(1);
         System.out.println(curBuf);
         createDelimiter();
         System.out.println(delimiter);
 
-
         while(mult<=tableSize)
         {
-
             curBuf.setLength(0);
             editField(mult);
             fillBuf(mult);
@@ -121,6 +117,4 @@ public class task1 {
             System.out.println(delimiter);
         }
     }
-
-
 }
