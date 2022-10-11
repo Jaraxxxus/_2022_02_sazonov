@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 
 public class task1 {
+    private final int maxSize = 32;
 
     int mult = 1;
     int tableSize = 0;
@@ -15,7 +16,7 @@ public class task1 {
     task1()
     {
 
-        run();
+        this.run();
     }
 
 
@@ -33,20 +34,21 @@ public class task1 {
         }
         tableSize = in.nextInt();
         in.close();
-        if (tableSize<1)
+        if (tableSize<1 )
         {
             System.out.println("negative number/zero detected");
+            return;
+        }
+
+        if (tableSize>maxSize )
+        {
+            System.out.println("your number is too big");
             return;
         }
         multLength = findLength(tableSize);
         fieldLength = findLength(tableSize*tableSize);
 
         printTable();
-
-
-
-
-
     }
 
 
