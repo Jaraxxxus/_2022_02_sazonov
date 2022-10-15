@@ -21,11 +21,9 @@ public class Task1 {
 
             System.out.print(editField(mult, multLength));
             System.out.println( fillRow(mult, tableSize, fieldLength));
-
-
-
-            mult++;
             System.out.println(delimiter);
+            mult++;
+
         }
     }
 
@@ -78,6 +76,4 @@ public class Task1 {
         return curBuf.toString();
 
     }
-
-
 }
