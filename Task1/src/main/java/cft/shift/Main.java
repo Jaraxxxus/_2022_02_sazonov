@@ -31,6 +31,8 @@ public class Main {
             System.out.println("your number is too big");
             return;
         }
+
+
         Task1.printTable(tableSize);
 
 
