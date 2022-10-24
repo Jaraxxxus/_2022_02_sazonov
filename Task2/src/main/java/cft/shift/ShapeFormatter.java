@@ -1,11 +1,15 @@
 package cft.shift;
 
 
+import cft.shift.shapes.Shape;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 
 public class ShapeFormatter {
 
-
+    private static final Logger log = LoggerFactory.getLogger(ShapeFormatter.class);
     static public String PrintShape(Shape shape)
     {
         FigureType type = shape.type;
@@ -17,8 +21,11 @@ public class ShapeFormatter {
                     case RECTANGLE -> PrintRectangle(shape);
                 };
     }
+
     static public String PrintTriangle(Shape shape)
     {
+        log.info("Печатается Треугольник");
+
         StringBuilder buf = new StringBuilder("Название: ");
         buf.append(shape.getName());
 
@@ -26,11 +33,9 @@ public class ShapeFormatter {
         buf.append(shape.calculateArea());
         buf.append(" кв. м.\n");
 
-
         buf.append("Периметр: ");
         buf.append(shape.calculatePerimeter());
         buf.append(" м.\n");
-
 
         ArrayList<Double> params = shape.getUniqueParams();
 
@@ -40,10 +45,10 @@ public class ShapeFormatter {
         buf.append(params.get(1));
         buf.append("\n");
 
-        buf.append(params.get(2));
         buf.append("Сторона B: ");
-        buf.append(params.get(3));
+        buf.append(params.get(2));
         buf.append(" м. Угол: ");
+        buf.append(params.get(3));
         buf.append("\n");
 
         buf.append("Сторона C: ");
@@ -57,6 +62,8 @@ public class ShapeFormatter {
 
     static public String PrintCircle(Shape shape)
     {
+        log.info("Печатается Круг");
+
         StringBuilder buf = new StringBuilder("Название: ");
         buf.append(shape.getName());
 
@@ -64,11 +71,9 @@ public class ShapeFormatter {
         buf.append(shape.calculateArea());
         buf.append(" кв. м.\n");
 
-
         buf.append("Периметр: ");
         buf.append(shape.calculatePerimeter());
         buf.append(" м.\n");
-
 
         ArrayList<Double> params = shape.getUniqueParams();
         buf.append("Радиус: ");
@@ -78,11 +83,11 @@ public class ShapeFormatter {
         buf.append(" м.\n");
 
         return buf.toString();
-
     }
 
     static public String PrintRectangle(Shape shape)
     {
+        log.info("Печатается Прямоугольник");
 
         StringBuilder buf = new StringBuilder("Название: ");
         buf.append(shape.getName());
@@ -91,11 +96,9 @@ public class ShapeFormatter {
         buf.append(shape.calculateArea());
         buf.append(" кв. м.\n");
 
-
         buf.append("Периметр: ");
         buf.append(shape.calculatePerimeter());
         buf.append(" м.\n");
-
 
         ArrayList<Double> params = shape.getUniqueParams();
         buf.append("Длинна: ");
@@ -111,14 +114,5 @@ public class ShapeFormatter {
         buf.append(" м.\n");
 
         return buf.toString();
-
     }
-
-
-
-
-
-
-
-
 }
