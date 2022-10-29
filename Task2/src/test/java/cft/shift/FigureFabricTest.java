@@ -1,6 +1,6 @@
 package cft.shift;
 
-import cft.shift.exception.InvalidArgumentException;
+import cft.shift.exception.BadTriangleParams;
 import cft.shift.shapes.Shape;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class FigureFabricTest {
     @Test
     @DisplayName("Создание треугольника")
-    void testCreateFigureTriangle() throws InvalidArgumentException {
+    void testCreateFigureTriangle() throws BadTriangleParams {
 
 
             assertThat(FigureFabric.createFigure(1.,2.,3.).type).isEqualTo(FigureType.TRIANGLE);
@@ -40,7 +40,7 @@ class FigureFabricTest {
 
     @Test
     @DisplayName("Создание треугольника через общую функцию")
-    void testCreateFigureTriangleGeneric() throws InvalidArgumentException {
+    void testCreateFigureTriangleGeneric() throws BadTriangleParams {
         ArrayList arr = new ArrayList<Double>();
         arr.add(1.);
         arr.add(2.);
@@ -54,7 +54,7 @@ class FigureFabricTest {
 
     @Test
     @DisplayName("Создание Прямоугольника через общую функцию")
-    void testCreateFigureRectangleGeneric() throws InvalidArgumentException {
+    void testCreateFigureRectangleGeneric() throws BadTriangleParams {
         ArrayList<Double> arr = new ArrayList<Double>();
         arr.add(1.);
         arr.add(2.);
@@ -66,7 +66,7 @@ class FigureFabricTest {
 
     @Test
     @DisplayName("Создание Круга через общую функцию")
-    void testCreateFigureCircleGeneric() throws InvalidArgumentException {
+    void testCreateFigureCircleGeneric() throws BadTriangleParams {
         ArrayList<Double> arr = new ArrayList<Double>();
         arr.add(1.);
         Shape cur = FigureFabric.createFigure(FigureType.CIRCLE,arr);

@@ -1,7 +1,7 @@
 package cft.shift.shapes;
 
 import cft.shift.FigureType;
-import cft.shift.exception.InvalidArgumentException;
+import cft.shift.exception.BadTriangleParams;
 
 import java.util.ArrayList;
 
@@ -11,8 +11,7 @@ public class Triangle extends Shape {
     private final double c;
     private final double perimeter;
 
-    public Triangle(double a, double b, double c) throws InvalidArgumentException
-    {
+    public Triangle(double a, double b, double c) throws BadTriangleParams {
         super.type = FigureType.TRIANGLE;
 
         this.a = a;
@@ -20,7 +19,7 @@ public class Triangle extends Shape {
         this.c = c;
         double maxSide = Math.max(a, Math.max(b, c));
         if (maxSide > a + b + c - maxSide){
-            throw (new InvalidArgumentException("Сторона треугольника "+  maxSide + " больше суммы двух других"));
+            throw (new BadTriangleParams("Сторона треугольника "+  maxSide + " больше суммы двух других"));
         }
         perimeter = a + b + c;
     }

@@ -30,31 +30,31 @@ public class ShapeFormatter {
         buf.append(shape.getName());
 
         buf.append("\nПлощадь: ");
-        buf.append(shape.calculateArea());
+        buf.append(String.format("%.2f",shape.calculateArea()));
         buf.append(" кв. м.\n");
 
         buf.append("Периметр: ");
-        buf.append(shape.calculatePerimeter());
+        buf.append(String.format("%.2f",shape.calculatePerimeter()));
         buf.append(" м.\n");
 
         ArrayList<Double> params = shape.getUniqueParams();
 
         buf.append("Сторона A: ");
-        buf.append(params.get(0));
+        buf.append(String.format("%.2f",params.get(0)));
         buf.append(" м. Угол: ");
-        buf.append(params.get(1));
+        buf.append(String.format("%.2f",params.get(1)));
         buf.append("\n");
 
         buf.append("Сторона B: ");
-        buf.append(params.get(2));
+        buf.append(String.format("%.2f",params.get(2)));
         buf.append(" м. Угол: ");
-        buf.append(params.get(3));
+        buf.append(String.format("%.2f",params.get(3)));
         buf.append("\n");
 
         buf.append("Сторона C: ");
-        buf.append(params.get(4));
+        buf.append(String.format("%.2f",params.get(4)));
         buf.append(" м. Угол: ");
-        buf.append(params.get(5));
+        buf.append(String.format("%.2f",params.get(5)));
         buf.append("\n");
 
         return buf.toString();
@@ -68,18 +68,18 @@ public class ShapeFormatter {
         buf.append(shape.getName());
 
         buf.append("\nПлощадь: ");
-        buf.append(shape.calculateArea());
+        buf.append(String.format("%.2f",shape.calculateArea()));
         buf.append(" кв. м.\n");
 
         buf.append("Периметр: ");
-        buf.append(shape.calculatePerimeter());
+        buf.append(String.format("%.2f",shape.calculatePerimeter()));
         buf.append(" м.\n");
 
         ArrayList<Double> params = shape.getUniqueParams();
         buf.append("Радиус: ");
-        buf.append(params.get(0));
+        buf.append(String.format("%.2f",params.get(0)));
         buf.append(" м.\nДиаметр: ");
-        buf.append(params.get(1));
+        buf.append(String.format("%.2f",params.get(1)));
         buf.append(" м.\n");
 
         return buf.toString();
@@ -93,24 +93,24 @@ public class ShapeFormatter {
         buf.append(shape.getName());
 
         buf.append("\nПлощадь: ");
-        buf.append(shape.calculateArea());
+        buf.append(String.format("%.2f",shape.calculateArea()));
         buf.append(" кв. м.\n");
 
         buf.append("Периметр: ");
-        buf.append(shape.calculatePerimeter());
+        buf.append(String.format("%.2f",shape.calculatePerimeter()));
         buf.append(" м.\n");
 
         ArrayList<Double> params = shape.getUniqueParams();
         buf.append("Длинна: ");
-        buf.append(params.get(0));
+        buf.append(String.format("%.2f",params.get(0)));
         buf.append(" м. \n");
 
         buf.append("Ширина: ");
-        buf.append(params.get(1));
+        buf.append(String.format("%.2f",params.get(1)));
         buf.append(" м. \n");
 
         buf.append("Длинна диагонали: ");
-        buf.append(params.get(2));
+        buf.append(String.format("%.2f",params.get(2)));
         buf.append(" м.\n");
 
         return buf.toString();

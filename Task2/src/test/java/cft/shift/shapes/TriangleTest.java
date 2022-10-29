@@ -2,6 +2,7 @@ package cft.shift.shapes;
 
 
 
+import cft.shift.exception.BadTriangleParams;
 import cft.shift.exception.InvalidArgumentException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +32,7 @@ class TriangleTest {
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (InvalidArgumentException ignored) {
+        catch (BadTriangleParams ignored) {
         }
         assertEquals(3+4+5, triangle.calculatePerimeter());
     }
@@ -44,11 +45,11 @@ class TriangleTest {
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (InvalidArgumentException ignored)
+        catch (BadTriangleParams ignored)
         {
 
         }
-        assertEquals(3*4/2,triangle.calculateArea());
+        assertEquals((double)3*4/2,triangle.calculateArea());
     }
 
     @Test
@@ -59,7 +60,7 @@ class TriangleTest {
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (InvalidArgumentException ignored)
+        catch (BadTriangleParams ignored)
         {
 
         }
@@ -73,11 +74,12 @@ class TriangleTest {
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (InvalidArgumentException ignored)
+        catch (BadTriangleParams ignored)
         {
 
         }
-        assertThat(triangle.getUniqueParams()).containsExactly(3.0,triangle.findAngle(3,4,5), 4.0,triangle.findAngle(4,3,5),
+        assertThat(triangle.getUniqueParams()).containsExactly(3.0,triangle.findAngle(3,4,5),
+                4.0, triangle.findAngle(4,3,5),
                 5.0, triangle.findAngle(5,4,3));
 
     }

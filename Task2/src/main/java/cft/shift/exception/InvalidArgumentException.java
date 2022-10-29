@@ -1,6 +1,6 @@
 package cft.shift.exception;
 
-public class InvalidArgumentException extends Throwable {
+public class InvalidArgumentException extends Exception {
     public InvalidArgumentException(String message) {
         super(message);
     }

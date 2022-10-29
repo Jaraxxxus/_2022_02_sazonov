@@ -1,5 +1,6 @@
 package cft.shift;
 
+import cft.shift.exception.BadTriangleParams;
 import cft.shift.exception.InvalidArgumentException;
 import cft.shift.shapes.Shape;
 import org.slf4j.*;
@@ -41,15 +42,9 @@ public class Main {
                 System.out.println(ShapeFormatter.PrintShape(figure));
             }
         } catch (FileNotFoundException ex) {
-            log.error("Нет такого файла " + args[0]);
+            log.error("Нет такого выходного файла " + args[0]);
         }
-        catch (InvalidArgumentException ex)
-        {
-            log.error(ex.getMessage());
-
-        }
-
-        catch (IOException ex)
+        catch (InvalidArgumentException | BadTriangleParams | IOException ex)
         {
             log.error(ex.getMessage());
         }
