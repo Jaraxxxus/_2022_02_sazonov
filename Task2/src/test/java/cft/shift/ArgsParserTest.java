@@ -268,7 +268,6 @@ class ArgsParserTest {
         });
         Assertions.assertEquals("Unexpected number of params", thrown.getMessage());
 
-
     }
 
 }

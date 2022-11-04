@@ -13,11 +13,8 @@ class FigureFabricTest {
     @Test
     @DisplayName("Создание треугольника")
     void testCreateFigureTriangle() throws BadTriangleParams {
-
-
             assertThat(FigureFabric.createFigure(1.,2.,3.).type).isEqualTo(FigureType.TRIANGLE);
             assertThat(FigureFabric.createFigure(1.,2.,3.).calculatePerimeter()).isEqualTo(6.);
-
     }
 
 
@@ -26,7 +23,6 @@ class FigureFabricTest {
     void testCreateFigureRectangle(){
             assertThat(FigureFabric.createFigure(1.,2.).type).isEqualTo(FigureType.RECTANGLE);
             assertThat(FigureFabric.createFigure(1.,2.).calculatePerimeter()).isEqualTo(6.);
-
     }
 
     @Test
@@ -34,7 +30,6 @@ class FigureFabricTest {
     void testCreateFigureCircle(){
         assertThat(FigureFabric.createFigure(1.).type).isEqualTo(FigureType.CIRCLE);
         assertThat(FigureFabric.createFigure(1.).calculatePerimeter()).isEqualTo(Math.PI*2*1);
-
     }
 
 
@@ -48,7 +43,6 @@ class FigureFabricTest {
         Shape cur = FigureFabric.createFigure(FigureType.TRIANGLE,arr);
         assertThat(cur.type).isEqualTo(FigureType.TRIANGLE);
         assertThat(cur.calculatePerimeter()).isEqualTo(5.);
-
     }
 
 
@@ -61,7 +55,6 @@ class FigureFabricTest {
         Shape cur = FigureFabric.createFigure(FigureType.RECTANGLE,arr);
         assertThat(cur.type).isEqualTo(FigureType.RECTANGLE);
         assertThat(FigureFabric.createFigure(1.,2.).calculatePerimeter()).isEqualTo(6.);
-
     }
 
     @Test
