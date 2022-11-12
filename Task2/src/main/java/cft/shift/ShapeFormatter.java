@@ -1,117 +1,85 @@
 package cft.shift;
 
 
-import cft.shift.shapes.Shape;
+import cft.shift.model.FigureType;
+import cft.shift.model.Shape;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
-public class ShapeFormatter {
+public class ShapeFormatter extends AbstractFormatter {
 
     private static final Logger log = LoggerFactory.getLogger(ShapeFormatter.class);
-    static public String PrintShape(Shape shape)
-    {
+
+    static public String PrintShape(Shape shape) {
         FigureType type = shape.type;
 
-        return switch (type)
-                {
-                    case TRIANGLE -> PrintTriangle(shape);
-                    case CIRCLE -> PrintCircle(shape);
-                    case RECTANGLE -> PrintRectangle(shape);
-                };
+        return switch (type) {
+            case TRIANGLE -> PrintTriangle(shape);
+            case CIRCLE -> PrintCircle(shape);
+            case RECTANGLE -> PrintRectangle(shape);
+        };
     }
 
-    static public String PrintTriangle(Shape shape)
-    {
-        log.info("Печатается Треугольник");
+    static public String PrintTriangle(Shape shape) {
+        log.info("РџРµС‡Р°С‚Р°РµС‚СЃСЏ РўСЂРµСѓРіРѕР»СЊРЅРёРє");
 
-        StringBuilder buf = new StringBuilder("Название: ");
-        buf.append(shape.getName());
 
-        buf.append("\nПлощадь: ");
-        buf.append(String.format("%.2f",shape.calculateArea()));
-        buf.append(" кв. м.\n");
-
-        buf.append("Периметр: ");
-        buf.append(String.format("%.2f",shape.calculatePerimeter()));
-        buf.append(" м.\n");
-
+        StringBuilder buf = format(shape);
         ArrayList<Double> params = shape.getUniqueParams();
 
-        buf.append("Сторона A: ");
-        buf.append(String.format("%.2f",params.get(0)));
-        buf.append(" м. Угол: ");
-        buf.append(String.format("%.2f",params.get(1)));
+        buf.append("РЎС‚РѕСЂРѕРЅР° A: ");
+        buf.append(String.format("%.2f", params.get(0)));
+        buf.append(" Рј. РЈРіРѕР»: ");
+        buf.append(String.format("%.2f", params.get(1)));
         buf.append("\n");
 
-        buf.append("Сторона B: ");
-        buf.append(String.format("%.2f",params.get(2)));
-        buf.append(" м. Угол: ");
-        buf.append(String.format("%.2f",params.get(3)));
+        buf.append("РЎС‚РѕСЂРѕРЅР° B: ");
+        buf.append(String.format("%.2f", params.get(2)));
+        buf.append(" Рј. РЈРіРѕР»: ");
+        buf.append(String.format("%.2f", params.get(3)));
         buf.append("\n");
 
-        buf.append("Сторона C: ");
-        buf.append(String.format("%.2f",params.get(4)));
-        buf.append(" м. Угол: ");
-        buf.append(String.format("%.2f",params.get(5)));
+        buf.append("РЎС‚РѕСЂРѕРЅР° C: ");
+        buf.append(String.format("%.2f", params.get(4)));
+        buf.append(" Рј. РЈРіРѕР»: ");
+        buf.append(String.format("%.2f", params.get(5)));
         buf.append("\n");
 
         return buf.toString();
     }
 
-    static public String PrintCircle(Shape shape)
-    {
-        log.info("Печатается Круг");
+    static public String PrintCircle(Shape shape) {
+        log.info("РџРµС‡Р°С‚Р°РµС‚СЃСЏ РљСЂСѓРі");
 
-        StringBuilder buf = new StringBuilder("Название: ");
-        buf.append(shape.getName());
-
-        buf.append("\nПлощадь: ");
-        buf.append(String.format("%.2f",shape.calculateArea()));
-        buf.append(" кв. м.\n");
-
-        buf.append("Периметр: ");
-        buf.append(String.format("%.2f",shape.calculatePerimeter()));
-        buf.append(" м.\n");
-
+        StringBuilder buf = format(shape);
         ArrayList<Double> params = shape.getUniqueParams();
-        buf.append("Радиус: ");
-        buf.append(String.format("%.2f",params.get(0)));
-        buf.append(" м.\nДиаметр: ");
-        buf.append(String.format("%.2f",params.get(1)));
-        buf.append(" м.\n");
+        buf.append("Р Р°РґРёСѓСЃ: ");
+        buf.append(String.format("%.2f", params.get(0)));
+        buf.append(" Рј.\nР”РёР°РјРµС‚СЂ: ");
+        buf.append(String.format("%.2f", params.get(1)));
+        buf.append(" Рј.\n");
 
         return buf.toString();
     }
 
-    static public String PrintRectangle(Shape shape)
-    {
-        log.info("Печатается Прямоугольник");
+    static public String PrintRectangle(Shape shape) {
+        log.info("РџРµС‡Р°С‚Р°РµС‚СЃСЏ РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє");
 
-        StringBuilder buf = new StringBuilder("Название: ");
-        buf.append(shape.getName());
-
-        buf.append("\nПлощадь: ");
-        buf.append(String.format("%.2f",shape.calculateArea()));
-        buf.append(" кв. м.\n");
-
-        buf.append("Периметр: ");
-        buf.append(String.format("%.2f",shape.calculatePerimeter()));
-        buf.append(" м.\n");
-
+        StringBuilder buf = format(shape);
         ArrayList<Double> params = shape.getUniqueParams();
-        buf.append("Длинна: ");
-        buf.append(String.format("%.2f",params.get(0)));
-        buf.append(" м. \n");
+        buf.append("Р”Р»РёРЅРЅР°: ");
+        buf.append(String.format("%.2f", params.get(0)));
+        buf.append(" Рј. \n");
 
-        buf.append("Ширина: ");
-        buf.append(String.format("%.2f",params.get(1)));
-        buf.append(" м. \n");
+        buf.append("РЁРёСЂРёРЅР°: ");
+        buf.append(String.format("%.2f", params.get(1)));
+        buf.append(" Рј. \n");
 
-        buf.append("Длинна диагонали: ");
-        buf.append(String.format("%.2f",params.get(2)));
-        buf.append(" м.\n");
+        buf.append("Р”Р»РёРЅРЅР° РґРёР°РіРѕРЅР°Р»Рё: ");
+        buf.append(String.format("%.2f", params.get(2)));
+        buf.append(" Рј.\n");
 
         return buf.toString();
     }

@@ -1,4 +1,4 @@
-package cft.shift.shapes;
+package cft.shift.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,23 +13,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class CircleTest {
 
     @Test
-    @DisplayName("Корректный перимитр круга")
+    @DisplayName("РљРѕСЂСЂРµРєС‚РЅС‹Р№ РїРµСЂРёРјРёС‚СЂ РєСЂСѓРіР°")
     void testCalculateRadius(){
         double a = Math.abs(Math.random())+1;
         Circle circle = new Circle(a);
-        assertEquals(circle.calculatePerimeter(),2*Math.PI*a);
+        assertEquals(circle.getPerimeter(),2*Math.PI*a);
     }
 
     @Test
-    @DisplayName("Корректная площадь круга")
+    @DisplayName("РљРѕСЂСЂРµРєС‚РЅР°СЏ РїР»РѕС‰Р°РґСЊ РєСЂСѓРіР°")
     void testCalculateArea(){
         double a = Math.abs(Math.random())+1;
         Circle circle = new Circle(a);
-        assertEquals(circle.calculatePerimeter(),2*Math.PI*a);
+        assertEquals(circle.getPerimeter(),2*Math.PI*a);
     }
 
     @Test
-    @DisplayName("корректность параметров круга")
+    @DisplayName("РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ РїР°СЂР°РјРµС‚СЂРѕРІ РєСЂСѓРіР°")
     void testOtherParams(){
         double a = Math.abs(Math.random())+1;
         Circle circle = new Circle(a);

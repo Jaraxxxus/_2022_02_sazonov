@@ -1,7 +1,8 @@
 package cft.shift;
 
-import cft.shift.exception.BadTriangleParams;
-import cft.shift.shapes.Shape;
+
+import cft.shift.model.FigureType;
+import cft.shift.model.Shape;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -11,60 +12,60 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 class FigureFabricTest {
     @Test
-    @DisplayName("Создание треугольника")
-    void testCreateFigureTriangle() throws BadTriangleParams {
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°")
+    void testCreateFigureTriangle() throws Exception {
             assertThat(FigureFabric.createFigure(1.,2.,3.).type).isEqualTo(FigureType.TRIANGLE);
-            assertThat(FigureFabric.createFigure(1.,2.,3.).calculatePerimeter()).isEqualTo(6.);
+            assertThat(FigureFabric.createFigure(1.,2.,3.).getPerimeter()).isEqualTo(6.);
     }
 
 
     @Test
-    @DisplayName("Создание Прямоугольника")
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°")
     void testCreateFigureRectangle(){
             assertThat(FigureFabric.createFigure(1.,2.).type).isEqualTo(FigureType.RECTANGLE);
-            assertThat(FigureFabric.createFigure(1.,2.).calculatePerimeter()).isEqualTo(6.);
+            assertThat(FigureFabric.createFigure(1.,2.).getPerimeter()).isEqualTo(6.);
     }
 
     @Test
-    @DisplayName("Создание Круга")
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ РљСЂСѓРіР°")
     void testCreateFigureCircle(){
         assertThat(FigureFabric.createFigure(1.).type).isEqualTo(FigureType.CIRCLE);
-        assertThat(FigureFabric.createFigure(1.).calculatePerimeter()).isEqualTo(Math.PI*2*1);
+        assertThat(FigureFabric.createFigure(1.).getPerimeter()).isEqualTo(Math.PI*2*1);
     }
 
 
     @Test
-    @DisplayName("Создание треугольника через общую функцию")
-    void testCreateFigureTriangleGeneric() throws BadTriangleParams {
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° С‡РµСЂРµР· РѕР±С‰СѓСЋ С„СѓРЅРєС†РёСЋ")
+    void testCreateFigureTriangleGeneric() throws Exception {
         ArrayList arr = new ArrayList<Double>();
         arr.add(1.);
         arr.add(2.);
         arr.add(2.);
         Shape cur = FigureFabric.createFigure(FigureType.TRIANGLE,arr);
         assertThat(cur.type).isEqualTo(FigureType.TRIANGLE);
-        assertThat(cur.calculatePerimeter()).isEqualTo(5.);
+        assertThat(cur.getPerimeter()).isEqualTo(5.);
     }
 
 
     @Test
-    @DisplayName("Создание Прямоугольника через общую функцию")
-    void testCreateFigureRectangleGeneric() throws BadTriangleParams {
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР° С‡РµСЂРµР· РѕР±С‰СѓСЋ С„СѓРЅРєС†РёСЋ")
+    void testCreateFigureRectangleGeneric() throws Exception {
         ArrayList<Double> arr = new ArrayList<Double>();
         arr.add(1.);
         arr.add(2.);
         Shape cur = FigureFabric.createFigure(FigureType.RECTANGLE,arr);
         assertThat(cur.type).isEqualTo(FigureType.RECTANGLE);
-        assertThat(FigureFabric.createFigure(1.,2.).calculatePerimeter()).isEqualTo(6.);
+        assertThat(FigureFabric.createFigure(1.,2.).getPerimeter()).isEqualTo(6.);
     }
 
     @Test
-    @DisplayName("Создание Круга через общую функцию")
-    void testCreateFigureCircleGeneric() throws BadTriangleParams {
+    @DisplayName("РЎРѕР·РґР°РЅРёРµ РљСЂСѓРіР° С‡РµСЂРµР· РѕР±С‰СѓСЋ С„СѓРЅРєС†РёСЋ")
+    void testCreateFigureCircleGeneric() throws Exception {
         ArrayList<Double> arr = new ArrayList<Double>();
         arr.add(1.);
         Shape cur = FigureFabric.createFigure(FigureType.CIRCLE,arr);
         assertThat(cur.type).isEqualTo(FigureType.CIRCLE);
-        assertThat(cur.calculatePerimeter()).isEqualTo(Math.PI*2*1);
+        assertThat(cur.getPerimeter()).isEqualTo(Math.PI*2*1);
     }
 
 }

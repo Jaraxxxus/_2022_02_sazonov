@@ -1,9 +1,8 @@
-package cft.shift.shapes;
+package cft.shift.model;
 
 
 
-import cft.shift.exception.BadTriangleParams;
-import cft.shift.exception.InvalidArgumentException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,53 +13,53 @@ import static org.junit.jupiter.api.Assertions.*;
 class TriangleTest {
 
     @Test
-    @DisplayName("Треугольник с нулевым углом")
+    @DisplayName("РўСЂРµСѓРіРѕР»СЊРЅРёРє СЃ РЅСѓР»РµРІС‹Рј СѓРіР»РѕРј")
     void testZeroAngle()
     {
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             Triangle triangle = new Triangle(1, 1,5);
         });
 
-        Assertions.assertEquals("Сторона треугольника 5.0 больше суммы двух других", thrown.getMessage());
+        Assertions.assertEquals("РЎС‚РѕСЂРѕРЅР° С‚СЂРµСѓРіРѕР»СЊРЅРёРєР° 5.0 Р±РѕР»СЊС€Рµ СЃСѓРјРјС‹ РґРІСѓС… РґСЂСѓРіРёС…", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Проверка периметра треугольника")
+    @DisplayName("РџСЂРѕРІРµСЂРєР° РїРµСЂРёРјРµС‚СЂР° С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°")
     void testCalculatePerimeterMethod()
     {
         Triangle triangle = null;
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (BadTriangleParams ignored) {
+        catch (Exception ignored) {
         }
-        assertEquals(3+4+5, triangle.calculatePerimeter());
+        assertEquals(3+4+5, triangle.getPerimeter());
     }
 
     @Test
-    @DisplayName("Проверка площади треугольника")
+    @DisplayName("РџСЂРѕРІРµСЂРєР° РїР»РѕС‰Р°РґРё С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°")
     void testCalculateAreaMethod()
     {
         Triangle triangle = null;
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (BadTriangleParams ignored)
+        catch (Exception ignored)
         {
 
         }
-        assertEquals((double)3*4/2,triangle.calculateArea());
+        assertEquals((double)3*4/2,triangle.getArea());
     }
 
     @Test
-    @DisplayName("поиск угла треугольника")
+    @DisplayName("РїРѕРёСЃРє СѓРіР»Р° С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°")
     void testFindAngleMethod()
     {
         Triangle triangle = null;
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (BadTriangleParams ignored)
+        catch (Exception ignored)
         {
 
         }
@@ -68,13 +67,13 @@ class TriangleTest {
     }
 
     @Test
-    @DisplayName("корректность параметров круга")
+    @DisplayName("РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ РїР°СЂР°РјРµС‚СЂРѕРІ РєСЂСѓРіР°")
     void testOtherParams(){
         Triangle triangle = null;
         try {
             triangle = new Triangle(3, 4,5);
         }
-        catch (BadTriangleParams ignored)
+        catch (Exception ignored)
         {
 
         }

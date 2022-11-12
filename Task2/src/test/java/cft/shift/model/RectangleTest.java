@@ -1,4 +1,4 @@
-package cft.shift.shapes;
+package cft.shift.model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -8,23 +8,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RectangleTest {
     @Test
-    @DisplayName("Проверка периметра прямоугольника")
+    @DisplayName("РџСЂРѕРІРµСЂРєР° РїРµСЂРёРјРµС‚СЂР° РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°")
     void testCalculatePerimeterMethod()
     {
         Rectangle rectangle = new Rectangle(4,5);
-        assertEquals((4+5)*2, rectangle.calculatePerimeter());
+        assertEquals((4+5)*2, rectangle.getPerimeter());
     }
 
     @Test
-    @DisplayName("Проверка площади прямоугольника")
+    @DisplayName("РџСЂРѕРІРµСЂРєР° РїР»РѕС‰Р°РґРё РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°")
     void testCalculateAreaMethod()
     {
         Rectangle rectangle = new Rectangle(4,5);
-        assertEquals(4*5, rectangle.calculateArea());
+        assertEquals(4*5, rectangle.getArea());
     }
 
     @Test
-    @DisplayName("Проверка диагонали прямоугольника")
+    @DisplayName("РџСЂРѕРІРµСЂРєР° РґРёР°РіРѕРЅР°Р»Рё РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°")
     void testCalculateDiagonalMethod()
     {
         Rectangle rectangle = new Rectangle(4,3);
@@ -32,7 +32,7 @@ class RectangleTest {
     }
 
     @Test
-    @DisplayName("Корректность параметров прямоугольника")
+    @DisplayName("РљРѕСЂСЂРµРєС‚РЅРѕСЃС‚СЊ РїР°СЂР°РјРµС‚СЂРѕРІ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєР°")
     void testOtherParams(){
         double a = Math.abs(Math.random())+1;
         double b = Math.abs(Math.random())+1;

@@ -1,35 +1,32 @@
 package cft.shift;
 
-import cft.shift.exception.BadTriangleParams;
-import cft.shift.exception.InvalidArgumentException;
-import cft.shift.shapes.Shape;
-import org.slf4j.*;
+import cft.shift.model.Shape;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-
 
 
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
+
     public static void main(String[] args) {
 
-        log.info("Старт программы");
+        log.info("РЎС‚Р°СЂС‚ РїСЂРѕРіСЂР°РјРјС‹");
 
-
-        if (args.length<1) {
-            log.error("недостаточно входных аргументов");
+        if (args.length < 1) {
+            log.error("РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РІС…РѕРґРЅС‹С… Р°СЂРіСѓРјРµРЅС‚РѕРІ");
             return;
         }
 
         try {
-            log.info("чтение входных данных");
+            log.info("Р§С‚РµРЅРёРµ РІС…РѕРґРЅС‹С… РґР°РЅРЅС‹С…");
             ArrayList<Double> data = InputFileReader.read(args[0]);
-            log.info("создание фигуры");
-            Shape figure = FigureFabric.createFigure(InputFileReader.getType() , data);
+            log.info("РЎРѕР·РґР°РЅРёРµ С„РёРіСѓСЂС‹");
+            Shape figure = FigureFabric.createFigure(InputFileReader.getType(), data);
 
             if (args.length == 2) {
 
@@ -37,15 +34,13 @@ public class Main {
                     writer.write(ShapeFormatter.PrintShape(figure));
                 }
 
-            }else {
-                log.info("Вывод в консоль");
+            } else {
+                log.info("Р’С‹РІРѕРґ РІ РєРѕРЅСЃРѕР»СЊ");
                 System.out.println(ShapeFormatter.PrintShape(figure));
             }
         } catch (FileNotFoundException ex) {
-            log.error("Нет такого выходного файла " + args[0]);
-        }
-        catch (InvalidArgumentException | BadTriangleParams | IOException ex)
-        {
+            log.error("РќРµС‚ С‚Р°РєРѕРіРѕ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р° " + args[0]);
+        } catch (Exception ex) {
             log.error(ex.getMessage());
         }
     }

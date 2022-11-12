@@ -1,6 +1,6 @@
 package cft.shift;
 
-import cft.shift.exception.InvalidArgumentException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +13,7 @@ class ArgsParserTest {
 
 
     @Test
-    @DisplayName("Имя капсом")
+    @DisplayName("РРјСЏ РєР°РїСЃРѕРј")
     void testRectangleCaps() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(5.);
@@ -21,33 +21,33 @@ class ArgsParserTest {
         ArrayList<Double> args = null;
         try {
             args = ArgsParser.parse("RECTANGLE", arr);
-        } catch (InvalidArgumentException ignored) {
+        } catch (Exception ignored) {
         } finally {
             assertThat(args).containsExactly(5.0, 9.0);
         }
     }
 
     @Test
-    @DisplayName("Имя маленькими буквами")
+    @DisplayName("РРјСЏ РјР°Р»РµРЅСЊРєРёРјРё Р±СѓРєРІР°РјРё")
     void testCircleSmall() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(9.);
         ArrayList<Double> args = null;
         try {
             args = ArgsParser.parse("circle", arr);
-        } catch (InvalidArgumentException ignored) {
+        } catch (Exception ignored) {
         } finally {
             assertThat(args).containsExactly( 9.0);
         }
     }
 
     @Test
-    @DisplayName("Круг с 2мя переменными")
+    @DisplayName("РљСЂСѓРі СЃ 2РјСЏ РїРµСЂРµРјРµРЅРЅС‹РјРё")
     void testCircleWith2Args() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(1.);
         arr.add(2.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("circle", arr);
         });
         Assertions.assertEquals("Unexpected number of params", thrown.getMessage());
@@ -56,23 +56,23 @@ class ArgsParserTest {
     }
 
     @Test
-    @DisplayName("Круг без переменных")
+    @DisplayName("РљСЂСѓРі Р±РµР· РїРµСЂРµРјРµРЅРЅС‹С…")
     void testCircleWith0Args() {
         ArrayList<Double> arr = new ArrayList<>();
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("circle", arr);
         });
         Assertions.assertEquals("Unexpected number of params", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник с 3мя переменными")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃ 3РјСЏ РїРµСЂРµРјРµРЅРЅС‹РјРё")
     void testRectangleWith3Args() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(1.);
         arr.add(2.);
         arr.add(2.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Unexpected number of params", thrown.getMessage());
@@ -81,17 +81,17 @@ class ArgsParserTest {
     }
 
     @Test
-    @DisplayName("Прямоугольник без переменных")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє Р±РµР· РїРµСЂРµРјРµРЅРЅС‹С…")
     void testRectangleWith0Args() {
         ArrayList<Double> arr = new ArrayList<>();
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Unexpected number of params", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник нормальный")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє РЅРѕСЂРјР°Р»СЊРЅС‹Р№")
     void testRectangleNormal() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(1.);
@@ -99,103 +99,103 @@ class ArgsParserTest {
         ArrayList<Double> args = null;
         try {
             args = ArgsParser.parse("rectangle", arr);
-        } catch (InvalidArgumentException ignored) {
+        } catch (Exception ignored) {
         } finally {
             assertThat(args).containsExactly(1.0, 2.0);
         }
     }
 
     @Test
-    @DisplayName("Круг нормальный")
+    @DisplayName("РљСЂСѓРі РЅРѕСЂРјР°Р»СЊРЅС‹Р№")
     void testCircleNormal() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(1.);
         ArrayList<Double> args = null;
         try {
             args = ArgsParser.parse("circle", arr);
-        } catch (InvalidArgumentException ignored) {
+        } catch (Exception ignored) {
         } finally {
             assertThat(args).containsExactly(1.0);
         }
     }
 
     @Test
-    @DisplayName("Круг с нулем")
+    @DisplayName("РљСЂСѓРі СЃ РЅСѓР»РµРј")
     void testCircleZero() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(0.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("circle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Круг с отрицательным радиусом")
+    @DisplayName("РљСЂСѓРі СЃ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј СЂР°РґРёСѓСЃРѕРј")
     void testCircleMinus() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(-2.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("circle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник с отрицательным параметром")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј РїР°СЂР°РјРµС‚СЂРѕРј")
     void testRectangleWithMinusArg() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(-1.);
         arr.add(3.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник с отрицательными параметрами")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹РјРё РїР°СЂР°РјРµС‚СЂР°РјРё")
     void testRectangleWithMinusArgs() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(-1.);
         arr.add(-3.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник с нулевыми параметрами")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃ РЅСѓР»РµРІС‹РјРё РїР°СЂР°РјРµС‚СЂР°РјРё")
     void testRectangleWithZeroArgs() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(0.);
         arr.add(0.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник с нулевым параметром")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃ РЅСѓР»РµРІС‹Рј РїР°СЂР°РјРµС‚СЂРѕРј")
     void testRectangleWithZeroArg() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(3.);
         arr.add(0.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Прямоугольник с нулевым и  отрицательным параметром")
+    @DisplayName("РџСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРє СЃ РЅСѓР»РµРІС‹Рј Рё  РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј РїР°СЂР°РјРµС‚СЂРѕРј")
     void testRectangleWithMinusAndZeroArg() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(-3.);
         arr.add(0.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("rectangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
@@ -204,17 +204,17 @@ class ArgsParserTest {
 
 
     @Test
-    @DisplayName("Опечатка в типе")
+    @DisplayName("РћРїРµС‡Р°С‚РєР° РІ С‚РёРїРµ")
     void testRandomType() {
         ArrayList<Double> arr = new ArrayList<>();
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("angle", arr);
         });
         Assertions.assertEquals("Type of figure is undetermined", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Треугольник нормальный")
+    @DisplayName("РўСЂРµСѓРіРѕР»СЊРЅРёРє РЅРѕСЂРјР°Р»СЊРЅС‹Р№")
     void testTriangleNormal() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(5.);
@@ -223,51 +223,50 @@ class ArgsParserTest {
         ArrayList<Double> args = null;
         try {
             args = ArgsParser.parse("triangle", arr);
-        } catch (InvalidArgumentException ignored) {
+        } catch (Exception ignored) {
         } finally {
             assertThat(args).containsExactly(5.0,3.,4.);
         }
     }
 
     @Test
-    @DisplayName("Треугольник с нулевыми параметрами")
+    @DisplayName("РўСЂРµСѓРіРѕР»СЊРЅРёРє СЃ РЅСѓР»РµРІС‹РјРё РїР°СЂР°РјРµС‚СЂР°РјРё")
     void testTriangleWithZeroArgs() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(0.);
         arr.add(0.);
         arr.add(5.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("triangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Треугольник с нулевым и  отрицательным параметром")
+    @DisplayName("РўСЂРµСѓРіРѕР»СЊРЅРёРє СЃ РЅСѓР»РµРІС‹Рј Рё  РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹Рј РїР°СЂР°РјРµС‚СЂРѕРј")
     void testTriangleWithMinusAndZeroArg() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(-3.);
         arr.add(0.);
         arr.add(3.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("triangle", arr);
         });
         Assertions.assertEquals("Value must be greater than zero", thrown.getMessage());
     }
 
     @Test
-    @DisplayName("Треугольник с 3мя переменными")
+    @DisplayName("РўСЂРµСѓРіРѕР»СЊРЅРёРє СЃ 3РјСЏ РїРµСЂРµРјРµРЅРЅС‹РјРё")
     void testTriangleWith4Args() {
         ArrayList<Double> arr = new ArrayList<>();
         arr.add(1.);
         arr.add(2.);
         arr.add(2.);
         arr.add(5.);
-        InvalidArgumentException thrown = Assertions.assertThrows(InvalidArgumentException.class, () -> {
+        Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             ArgsParser.parse("triangle", arr);
         });
         Assertions.assertEquals("Unexpected number of params", thrown.getMessage());
-
     }
 
 }
