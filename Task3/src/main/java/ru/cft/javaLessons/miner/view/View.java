@@ -19,7 +19,7 @@ public class View implements ModelListener {
         highScoresWindow = new HighScoresWindow(mainWindow);
         mainWindow.setHighScoresMenuAction(e -> highScoresWindow.setVisible(true));
         mainWindow.setExitMenuAction(e -> mainWindow.dispose());
-        mainWindow.setNewGameMenuAction(e ->control.startNewGame());
+        mainWindow.setNewGameMenuAction(e -> control.startNewGame());
         winWindow = new WinWindow(mainWindow);
         loseWindow = new LoseWindow(mainWindow);
         loseWindow.setExitListener(e -> mainWindow.dispose());
@@ -29,15 +29,12 @@ public class View implements ModelListener {
 
     @Override
     public void onTimerChange(int value) {
-
+        mainWindow.setTimerValue(value);
     }
 
     @Override
     public void setGameLose() {
-        //stop watch
-
         loseWindow.setVisible(true);
-
     }
 
     @Override
@@ -45,16 +42,12 @@ public class View implements ModelListener {
         //stop watch
         winWindow.setVisible(true);
         winWindow.setNewGameListener(control);
-
-
     }
 
     @Override
     public void onFieldSizeChanged(GameType type) {
         mainWindow.dispose();
         start(type);
-
-
     }
 
     @Override
@@ -92,32 +85,26 @@ public class View implements ModelListener {
         mainWindow.setVisible(true);
 
         switch (type) {
-            case NOVICE:  {
+            case NOVICE -> {
                 col = 9;
                 row = 9;
                 bombCount = 10;
-                break;
-
             }
-            case MEDIUM: {
+            case MEDIUM -> {
                 col = 16;
                 row = 16;
                 bombCount = 40;
-                break;
             }
-            case EXPERT: {
+            case EXPERT -> {
                 col = 16;
                 row = 30;
                 bombCount = 99;
-                break;
             }
-
-            default:
-                throw new IllegalStateException("Unexpected value: " + type);
+            default -> throw new IllegalStateException("Unexpected value: " + type);
         }
         mainWindow.createGameField(col, row);
-        for(int i = 0; i< col;++i) {
-            for(int j = 0; j < row; ++j){
+        for (int i = 0; i < col; ++i) {
+            for (int j = 0; j < row; ++j) {
                 mainWindow.setCellImage(j, i, GameImage.CLOSED);
             }
         }
@@ -126,9 +113,4 @@ public class View implements ModelListener {
 
     }
 
-
- /*   private void onStartNewGame(GameType type) {
-        mainWindow.dispose();
-        start(type);
-    }*/
 }
