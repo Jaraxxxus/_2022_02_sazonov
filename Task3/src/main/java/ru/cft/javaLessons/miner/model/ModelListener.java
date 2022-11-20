@@ -1,4 +1,4 @@
-package ru.cft.javaLessons.miner.app;
+package ru.cft.javaLessons.miner.model;
 
 import ru.cft.javaLessons.miner.view.GameImage;
 import ru.cft.javaLessons.miner.view.GameType;
@@ -19,7 +19,7 @@ public interface ModelListener {
 
     void onRecordChanged();
 
-    void setNewRecord(GameType gameType, String winnerName, int timeValue);
+    void setRecord(GameType gameType, String winnerName, int timeValue);
 
     void start(GameType type);
 

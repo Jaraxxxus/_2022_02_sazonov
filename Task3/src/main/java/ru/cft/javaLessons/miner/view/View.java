@@ -1,17 +1,20 @@
 package ru.cft.javaLessons.miner.view;
 
-import ru.cft.javaLessons.miner.app.GameControl;
-import ru.cft.javaLessons.miner.app.ModelListener;
+import ru.cft.javaLessons.miner.app.GameController;
+import ru.cft.javaLessons.miner.model.ModelListener;
 
 public class View implements ModelListener {
+
     private final MainWindow mainWindow;
     private final WinWindow winWindow;
-    private final GameControl control;
+    private final GameController control;
     private final LoseWindow loseWindow;
     private final HighScoresWindow highScoresWindow;
     private final SettingsWindow settingsWindow;
 
-    public View(GameControl control) {
+    private final RecordsWindow recordWindow;
+
+    public View(GameController control) {
         this.control = control;
         mainWindow = new MainWindow();
         settingsWindow = new SettingsWindow(mainWindow);
@@ -24,8 +27,12 @@ public class View implements ModelListener {
         loseWindow = new LoseWindow(mainWindow);
         loseWindow.setExitListener(e -> mainWindow.dispose());
         winWindow.setExitListener(e -> mainWindow.dispose());
+
+        recordWindow = new RecordsWindow(mainWindow);
+        recordWindow.setNameListener(control);
         start(GameType.NOVICE);
     }
+
 
     @Override
     public void onTimerChange(int value) {
@@ -39,7 +46,6 @@ public class View implements ModelListener {
 
     @Override
     public void setGameWin() {
-        //stop watch
         winWindow.setVisible(true);
         winWindow.setNewGameListener(control);
     }
@@ -53,7 +59,6 @@ public class View implements ModelListener {
     @Override
     public void onsetCellImage(int col, int row, GameImage gameImage) {
         mainWindow.setCellImage(col, row, gameImage);
-
     }
 
     @Override
@@ -63,20 +68,22 @@ public class View implements ModelListener {
 
     @Override
     public void onRecordChanged() {
-        System.out.println(" smth change \n");
-
+        recordWindow.setVisible(true);
     }
 
     @Override
-    public void setNewRecord(GameType gameType, String winnerName, int timeValue) {
-        System.out.println("record new winner \n");
-
+    public void setRecord(GameType gameType, String winnerName, int timeValue) {
+        switch (gameType) {
+            case NOVICE -> highScoresWindow.setNoviceRecord(winnerName, timeValue);
+            case MEDIUM -> highScoresWindow.setMediumRecord(winnerName, timeValue);
+            case EXPERT -> highScoresWindow.setExpertRecord(winnerName, timeValue);
+            default -> throw new IllegalStateException("Unexpected value: " + gameType);
+        }
     }
 
     @Override
     public void start(GameType type) {
-
-        int col = 0, row = 0, bombCount = 0;
+        int col, row, bombCount;
 
         settingsWindow.setGameTypeListener(control);
         loseWindow.setNewGameListener(control);
@@ -110,7 +117,5 @@ public class View implements ModelListener {
         }
         mainWindow.setBombsCount(bombCount);
         mainWindow.setVisible(true);
-
     }
-
 }
