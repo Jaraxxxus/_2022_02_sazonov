@@ -1,4 +1,4 @@
-package ru.cft.javaLessons.miner.app;
+package ru.cft.javaLessons.miner.model;
 
 public enum CellType {
     CLOSED,
