@@ -1,14 +1,19 @@
 package cft.shift;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.concurrent.Callable;
 
-public class TaskDescribe implements Callable<Double> {
+public class Task implements Callable<Double> {
     private final int nStart;
     private final int nEnd;
     private final int nStep;
     private double nResult = 0;
 
-    public TaskDescribe(int start, int end, int step) {
+    private static final Logger log = LoggerFactory.getLogger(Task.class);
+
+    public Task(int start, int end, int step) {
         nStart = start;
         nEnd = end;
         nStep = step;
@@ -17,8 +22,9 @@ public class TaskDescribe implements Callable<Double> {
     @Override
     public Double call() {
         for (int n = nStart; n <= nEnd; n = n + nStep) {
-            long del = (long) n * n + n;
-            nResult += 1. / del;
+            long divider = (long) n * (n + 1);
+            nResult += 1. / divider;
+            log.info("Cur step = " + nStep + ", cur result = nResult");
         }
         return nResult;
     }
