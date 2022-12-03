@@ -1,3 +1,4 @@
 rootProject.name = '_2022_02_sazonov'
 include 'Task1'
+include 'Task5'
 
