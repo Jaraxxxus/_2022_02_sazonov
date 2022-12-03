@@ -12,8 +12,7 @@ public class CalculateFunction {
         int processors = Runtime.getRuntime().availableProcessors();
         double sum = 0;
 
-        System.out.println(processors + " processor"
-                + (processors != 1 ? "s are " : " is ")
+        System.out.println(processors + " processor" + (processors != 1 ? "s are " : " is ")
                 + "available");
         ExecutorService pool = Executors.newFixedThreadPool(processors);
         Set<Future<Double>> set = new HashSet<>();
