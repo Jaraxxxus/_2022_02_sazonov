@@ -24,7 +24,7 @@ public class Task implements Callable<Double> {
         for (int n = nStart; n <= nEnd; n = n + nStep) {
             long divider = (long) n * (n + 1);
             nResult += 1. / divider;
-            log.info("Cur step = " + nStep + ", cur result = nResult");
+            log.info("Cur step = " + n + ", cur result =" + nResult);
         }
         return nResult;
     }
