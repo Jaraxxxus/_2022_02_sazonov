@@ -1,5 +1,7 @@
 package cft.shift;
 
+import org.slf4j.ILoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedList;
@@ -7,7 +9,7 @@ import java.util.Properties;
 
 
 public class MultiThreadFabric {
-
+    private static final ILoggerFactory
    private static int producerCount, consumerCount, producerTime, consumerTime, storageSize;
 
     {
