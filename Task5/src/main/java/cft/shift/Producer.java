@@ -1,9 +1,12 @@
 package cft.shift;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.LinkedList;
 
 public class Producer implements Runnable {
-
+    private static final Logger log = LoggerFactory.getLogger(Producer.class);
     private static volatile int curID = 0;
     private final int id = this.getID();
     private Resource res;
@@ -30,9 +33,9 @@ public class Producer implements Runnable {
             try {
                 Thread.sleep(producerTime);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
-            System.out.println("Producer Thread # " + Thread.currentThread());
+            log.info("Producer Thread # " + Thread.currentThread() + "started");
         }
     }
 
@@ -40,14 +43,14 @@ public class Producer implements Runnable {
         synchronized (storageList) {
             while (storageList.size() == storageSize) {
                 try {
-                    System.out.println("Storage is full");
+                    log.info("Storage is full");
                     storageList.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 }
             }
             storageList.add(res);
-            System.out.println("Producer " + id + " put product "+ res.getId());
+            log.info("Producer " + id + " put product " + res.getId());
             storageList.notifyAll();
         }
     }

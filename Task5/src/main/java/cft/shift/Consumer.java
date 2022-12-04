@@ -1,8 +1,12 @@
 package cft.shift;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.LinkedList;
 
 public class Consumer implements Runnable{
+    private static final Logger log = LoggerFactory.getLogger(Consumer.class);
     private final LinkedList<Resource> storageList;
     private final int consumerTime;
     private static volatile int curID = 0;
@@ -24,9 +28,9 @@ public class Consumer implements Runnable{
             try {
                 Thread.sleep(consumerTime);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error(e.getMessage());
             }
-            System.out.println("Cons Thread loop " + Thread.currentThread());
+           log.info("Cons Thread loop " + Thread.currentThread());
         }
     }
 
@@ -34,15 +38,15 @@ public class Consumer implements Runnable{
 
         synchronized (storageList) {
             while (storageList.size()==0){
-                System.out.println("storage is empty");
+                log.info("storage is empty");
                 try {
                     storageList.wait();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error(e.getMessage());
                 }
             }
             Resource res = storageList.removeFirst();
-            System.out.println("Consumer " + id + " get product "+ res.getId());
+            log.info("Consumer " + id + " get product "+ res.getId());
             storageList.notifyAll();
         }
     }

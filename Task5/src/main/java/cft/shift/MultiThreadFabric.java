@@ -1,6 +1,7 @@
 package cft.shift;
 
-import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,8 +10,8 @@ import java.util.Properties;
 
 
 public class MultiThreadFabric {
-    private static final ILoggerFactory
-   private static int producerCount, consumerCount, producerTime, consumerTime, storageSize;
+    private static final Logger log = LoggerFactory.getLogger(MultiThreadFabric.class);
+    private static int producerCount, consumerCount, producerTime, consumerTime, storageSize;
 
     {
 
@@ -26,22 +27,24 @@ public class MultiThreadFabric {
             producerTime = Integer.parseInt(properties.getProperty("producerTime"));
             consumerTime = Integer.parseInt(properties.getProperty("consumerTime"));
             storageSize = Integer.parseInt(properties.getProperty("storageSize"));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+        } catch (IOException e) {
+            log.error(e.getMessage());
         }
+        log.info("will be created : " + producerCount + " producers, " + consumerCount + "consumers, storageSize = " + storageSize);
+        log.info("cooldown : " + producerTime + " ms for producer, " + consumerTime + " ms for consumers");
 
     }
 
 
-    MultiThreadFabric(){
+    MultiThreadFabric() {
 
         LinkedList<Resource> storageList = new LinkedList<>();
         for (int i = 0; i < producerCount; i++) {
-            new Thread(new Producer(storageList,producerTime,storageSize)).start();
+            new Thread(new Producer(storageList, producerTime, storageSize)).start();
         }
 
-        for(int i = 0; i < consumerCount;i++) {
-            new Thread(new Consumer(storageList,consumerTime)).start();
+        for (int i = 0; i < consumerCount; i++) {
+            new Thread(new Consumer(storageList, consumerTime)).start();
         }
 
     }
