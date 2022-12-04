@@ -13,7 +13,25 @@ public class MultiThreadFabric {
     private static final Logger log = LoggerFactory.getLogger(MultiThreadFabric.class);
     private static int producerCount, consumerCount, producerTime, consumerTime, storageSize;
 
-    {
+
+    MultiThreadFabric() {
+        try {
+            init();
+        } catch (IOException e) {
+            return;
+        }
+        LinkedList<Resource> storageList = new LinkedList<>();
+        for (int i = 0; i < producerCount; i++) {
+            new Thread(new Producer(storageList, producerTime, storageSize)).start();
+        }
+
+        for (int i = 0; i < consumerCount; i++) {
+            new Thread(new Consumer(storageList, consumerTime)).start();
+        }
+
+    }
+
+    private void init() throws IOException {
 
         Properties properties = new Properties();
         String propFileName = "config.properties";
@@ -29,23 +47,13 @@ public class MultiThreadFabric {
             storageSize = Integer.parseInt(properties.getProperty("storageSize"));
         } catch (IOException e) {
             log.error(e.getMessage());
+
+            log.error("further work is not possible");
+            throw e;
+
         }
         log.info("will be created : " + producerCount + " producers, " + consumerCount + "consumers, storageSize = " + storageSize);
         log.info("cooldown : " + producerTime + " ms for producer, " + consumerTime + " ms for consumers");
-
-    }
-
-
-    MultiThreadFabric() {
-
-        LinkedList<Resource> storageList = new LinkedList<>();
-        for (int i = 0; i < producerCount; i++) {
-            new Thread(new Producer(storageList, producerTime, storageSize)).start();
-        }
-
-        for (int i = 0; i < consumerCount; i++) {
-            new Thread(new Consumer(storageList, consumerTime)).start();
-        }
 
     }
 
