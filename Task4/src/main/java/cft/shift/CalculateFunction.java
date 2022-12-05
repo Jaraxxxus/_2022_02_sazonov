@@ -30,7 +30,7 @@ public class CalculateFunction {
             sum += future.get();
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("Calculation of the sum of  1/(N(N+1)) in " + (endTime - startTime) +
+        log.info("Calculation of the sum of  1/(N(N+1)) in " + (endTime - startTime) +
                 " milliseconds.");
 
         return sum;

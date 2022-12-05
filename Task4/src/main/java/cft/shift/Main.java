@@ -21,6 +21,7 @@ public class Main {
         }
 
         log.info(" sum  " + sum);
+        System.out.println("result is " + sum + ", mathematical expectation = 1");
         System.exit(0);
     }
 
