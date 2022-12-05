@@ -17,9 +17,10 @@ public class ClientHandler implements Runnable {
 
     private final Server server;
 
+    private String authorizedUserName;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
-    private String authorizedUserName;
+
     private boolean isUserNameAuthorized;
 
     public ClientHandler(Socket clientSocket, Server server) {
@@ -30,13 +31,13 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try (clientSocket) {
-            outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
+            outputStream = new ObjectOutputStream(clientSocket.getOutputStream());
             authorizeUser();
             if (isUserNameAuthorized) {
                 addUserToChat();
             } else {
-                sendResponse(new Message(MessageType.NAME_DECLINED));
+                sendMessage(new Message(MessageType.NAME_DECLINED));
             }
         } catch (IOException | ClassNotFoundException e) {
             log.error("Ошибка при работе с клиентом " + clientSocket.getRemoteSocketAddress() +
@@ -49,7 +50,7 @@ public class ClientHandler implements Runnable {
     }
 
     private void authorizeUser() throws IOException, ClassNotFoundException {
-        Message request = receiveRequest();
+        Message request = getMessage();
         MessageType type = request.getType();
         log.info("Получен запрос из сокета клиента {} с типом {} .",
                 clientSocket.getRemoteSocketAddress(), type);
@@ -77,7 +78,7 @@ public class ClientHandler implements Runnable {
     }
 
     private void addUserToChat() throws IOException, ClassNotFoundException {
-        sendResponse(new Message(MessageType.NAME_ACCEPTED));
+        sendMessage(new Message(MessageType.NAME_ACCEPTED));
         server.newUser(authorizedUserName, this);
         server.sendBroadcastMessage(new Message(MessageType.NEW_USER, null, authorizedUserName));
         sendListOfOnlineUsersToNewUser();
@@ -88,7 +89,7 @@ public class ClientHandler implements Runnable {
         for (String userName : server.getAllUsers()) {
             if (!userName.equals(authorizedUserName)) {
                 Message message = new Message(MessageType.NEW_USER,null, userName);
-                sendResponse(message);
+                sendMessage(message);
             }
         }
         log.info("Информация о пользователях онлайн отправлена пользователю {} .", authorizedUserName);
@@ -96,11 +97,11 @@ public class ClientHandler implements Runnable {
 
     private void startClientListener() throws IOException, ClassNotFoundException {
         while (!Thread.currentThread().isInterrupted()) {
-            Message request = receiveRequest();
+            Message request = getMessage();
             MessageType type = request.getType();
             if (type == MessageType.DEFAULT_MESSAGE) {
                 server.sendBroadcastMessage(new Message(MessageType.DEFAULT_MESSAGE,
-                        request.getData(), authorizedUserName, request.getDate()));
+                        request.getData(), authorizedUserName, request.getDateTime()));
             } else if (type == MessageType.DISCONNECT) {
                 log.info("Получен запрос на закрытие соединения: пользователь - {} .Обработчик будет остановлен",
                         authorizedUserName);
@@ -120,11 +121,11 @@ public class ClientHandler implements Runnable {
         server.sendBroadcastMessage(new Message(MessageType.DELETE_USER, authorizedUserName));
     }
 
-    void sendResponse(Message message) throws IOException {
+    void sendMessage(Message message) throws IOException {
         outputStream.writeObject(message);
     }
 
-    private Message receiveRequest() throws IOException, ClassNotFoundException {
+    private Message getMessage() throws IOException, ClassNotFoundException {
         return (Message) inputStream.readObject();
     }
 

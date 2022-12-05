@@ -17,7 +17,7 @@ public class Parser {
                 (getClass().getResourceAsStream("/config.properties")))) {
             Properties properties = new Properties();
             properties.load(reader);
-            portNumber = Integer.parseInt(properties.getProperty("port :"));
+            portNumber = Integer.parseInt(properties.getProperty("port"));
         }
     }
     public int getPortNumber(){

@@ -2,4 +2,6 @@ rootProject.name = '_2022_02_sazonov'
 include 'Task1'
 include 'Task2'
 include 'Server'
+include 'Server:Client'
+findProject(':Server:Client')?.name = 'Client'
 

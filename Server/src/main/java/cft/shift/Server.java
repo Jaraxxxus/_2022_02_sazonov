@@ -24,7 +24,7 @@ class Server {
     Server(Parser parser) {
         this.threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()/2);
         this.portNumber = parser.getPortNumber();
-        connectionsMap = new ConcurrentHashMap<>();
+        connectionsMap = new ConcurrentHashMap<String, ClientHandler>();
     }
 
     void startServer() {
@@ -45,7 +45,7 @@ class Server {
     void sendBroadcastMessage(Message message) {
         for (ClientHandler handler : connectionsMap.values()) {
             try {
-                handler.sendResponse(message);
+                handler.sendMessage(message);
                 log.info("Пользователю {} отправлено сообщение.", handler.getAuthorizedUserName());
             } catch (IOException e) {
                 log.error("Ошибка при отправке сообщения пользователю " + handler.getAuthorizedUserName() + " :", e);
@@ -61,8 +61,8 @@ class Server {
         connectionsMap.put(userName, handler);
     }
 
-    void deleteUser(String nameOfNewUser) {
-        connectionsMap.remove(nameOfNewUser);
+    void deleteUser(String newName) {
+        connectionsMap.remove(newName);
     }
 
     Set<String> getAllUsers() {

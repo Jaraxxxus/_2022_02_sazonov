@@ -4,10 +4,12 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
+        JacksonTaster.pojoToJsonString();
         try {
             Parser parser = new Parser();
             Server handler = new Server(parser);
             handler.startServer();
+
         } catch (IOException e) {
             System.out.println("error");
         } catch (NumberFormatException e) {
