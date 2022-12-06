@@ -13,8 +13,6 @@ public class MultiThreadFabric {
     private static int producerCount, consumerCount, producerTime, consumerTime, storageSize;
 
 
-
-
     MultiThreadFabric() {
         try {
             init();

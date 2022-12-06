@@ -10,10 +10,12 @@ public class Storage {
     private static final Logger log = LoggerFactory.getLogger(Storage.class);
     private static int storageSize;
     private static final Queue<Resource> storageQueue = new LinkedList<>();
-    public Storage(int nStorageSize){
+
+    public Storage(int nStorageSize) {
         storageSize = nStorageSize;
 
     }
+
     public void put(Resource res) {
         synchronized (storageQueue) {
             while (storageQueue.size() == storageSize) {
@@ -45,6 +47,6 @@ public class Storage {
             storageQueue.notifyAll();
         }
 
-        return  res;
+        return res;
     }
 }
