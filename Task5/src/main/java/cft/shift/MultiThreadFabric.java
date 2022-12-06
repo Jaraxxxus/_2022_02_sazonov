@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.LinkedList;
 import java.util.Properties;
 
 
@@ -14,19 +13,21 @@ public class MultiThreadFabric {
     private static int producerCount, consumerCount, producerTime, consumerTime, storageSize;
 
 
+
+
     MultiThreadFabric() {
         try {
             init();
         } catch (IOException e) {
             return;
         }
-        LinkedList<Resource> storageList = new LinkedList<>();
+        Storage storage = new Storage(storageSize);
         for (int i = 0; i < producerCount; i++) {
-            new Thread(new Producer(storageList, producerTime, storageSize)).start();
+            new Thread(new Producer(storage, producerTime)).start();
         }
 
         for (int i = 0; i < consumerCount; i++) {
-            new Thread(new Consumer(storageList, consumerTime)).start();
+            new Thread(new Consumer(storage, consumerTime)).start();
         }
 
     }
