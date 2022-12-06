@@ -8,12 +8,11 @@ import java.util.Queue;
 
 public class Storage {
     private static final Logger log = LoggerFactory.getLogger(Storage.class);
-    private static int storageSize;
+    private final int storageSize;
     private static final Queue<Resource> storageQueue = new LinkedList<>();
 
-    public Storage(int nStorageSize) {
-        storageSize = nStorageSize;
-
+    public Storage(int StorageSize) {
+        this.storageSize = StorageSize;
     }
 
     public void put(Resource res) {
