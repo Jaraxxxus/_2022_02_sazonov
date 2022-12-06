@@ -27,6 +27,7 @@ public class View implements ModelListener {
         loseWindow = new LoseWindow(mainWindow);
         loseWindow.setExitListener(e -> mainWindow.dispose());
         winWindow.setExitListener(e -> mainWindow.dispose());
+        winWindow.setNewGameListener(control);
 
         recordWindow = new RecordsWindow(mainWindow);
         recordWindow.setNameListener(control);
@@ -47,7 +48,6 @@ public class View implements ModelListener {
     @Override
     public void setGameWin() {
         winWindow.setVisible(true);
-        winWindow.setNewGameListener(control);
     }
 
     @Override
