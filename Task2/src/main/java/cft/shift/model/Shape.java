@@ -18,4 +18,9 @@ abstract public class Shape {
     }
 
     abstract public ArrayList<Double> getUniqueParams();
+
+    public String getBaseInfo()
+    {
+        return String.format(" Название: %s \nПлощадь: %.2f кв. м.\n Периметр: %.2f м.\n", getName(), area, perimeter);
+    }
 }

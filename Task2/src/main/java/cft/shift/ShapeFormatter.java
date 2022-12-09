@@ -8,13 +8,14 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
-public class ShapeFormatter extends AbstractFormatter {
+public class ShapeFormatter {
 
+    static ArrayList<Double> params;
+    static final int EXPECTED_BUF_SIZE = 150;
     private static final Logger log = LoggerFactory.getLogger(ShapeFormatter.class);
-
     static public String PrintShape(Shape shape) {
         FigureType type = shape.type;
-
+        params = shape.getUniqueParams();
         return switch (type) {
             case TRIANGLE -> PrintTriangle(shape);
             case CIRCLE -> PrintCircle(shape);
@@ -26,9 +27,8 @@ public class ShapeFormatter extends AbstractFormatter {
         log.info("Печатается Треугольник");
 
 
-        StringBuilder buf = format(shape);
-        ArrayList<Double> params = shape.getUniqueParams();
-
+        StringBuilder buf = new StringBuilder(EXPECTED_BUF_SIZE);
+        buf.append(shape.getBaseInfo());
         buf.append("Сторона A: ");
         buf.append(String.format("%.2f", params.get(0)));
         buf.append(" м. Угол: ");
@@ -53,7 +53,8 @@ public class ShapeFormatter extends AbstractFormatter {
     static public String PrintCircle(Shape shape) {
         log.info("Печатается Круг");
 
-        StringBuilder buf = format(shape);
+        StringBuilder buf = new StringBuilder(EXPECTED_BUF_SIZE);
+        buf.append(shape.getBaseInfo());
         ArrayList<Double> params = shape.getUniqueParams();
         buf.append("Радиус: ");
         buf.append(String.format("%.2f", params.get(0)));
@@ -67,8 +68,8 @@ public class ShapeFormatter extends AbstractFormatter {
     static public String PrintRectangle(Shape shape) {
         log.info("Печатается Прямоугольник");
 
-        StringBuilder buf = format(shape);
-        ArrayList<Double> params = shape.getUniqueParams();
+        StringBuilder buf = new StringBuilder(EXPECTED_BUF_SIZE);
+        buf.append(shape.getBaseInfo());
         buf.append("Длинна: ");
         buf.append(String.format("%.2f", params.get(0)));
         buf.append(" м. \n");
