@@ -18,7 +18,7 @@ public class FigureFabric {
                 double b = array.get(1);
                 double c = array.get(2);
                 shape = createFigure(a, b, c);
-                log.info("создан треугольник c параметрами" + a + " " + b + " " + c);
+                log.info("создан треугольник c параметрами " + a + " " + b + " " + c);
 
             }
             case RECTANGLE -> {

@@ -21,6 +21,6 @@ abstract public class Shape {
 
     public String getBaseInfo()
     {
-        return String.format(" Название: %s \nПлощадь: %.2f кв. м.\n Периметр: %.2f м.\n", getName(), area, perimeter);
+        return String.format("Название: %s \nПлощадь: %.2f кв. м.\nПериметр: %.2f м.\n", getName(), area, perimeter);
     }
 }
