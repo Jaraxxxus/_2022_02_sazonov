@@ -1,8 +1,8 @@
-package cft.shift;
+package cft.shift.message;
 
 public enum MessageType {
     DEFAULT_MESSAGE,
-    AUTHORIZATION,
+    REGISTRATION,
     NEW_USER,
     DELETE_USER,
     NAME_ACCEPTED,

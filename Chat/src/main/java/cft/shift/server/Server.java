@@ -1,6 +1,7 @@
-package cft.shift;
+package cft.shift.server;
 
 
+import cft.shift.message.Message;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,14 +30,15 @@ class Server {
 
     void startServer() {
         try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
-            log.info("Сервер запущен");
+            System.out.println(portNumber);
+            log.info("Сервер запущен, порт = " + portNumber);
             while (!Thread.currentThread().isInterrupted()) {
                 Socket clientSocket = serverSocket.accept();
                 log.info("Сервер принял входящее соединение с адреса {}", clientSocket.getRemoteSocketAddress());
                 threadPool.submit(new ClientHandler(clientSocket, this));
             }
         } catch (IOException e) {
-            log.error("Ошибка при работе сервера : ", e.getMessage());
+            log.error("Ошибка при работе сервера : " + e.getMessage());
         }
         shutdown();
 
@@ -46,14 +48,14 @@ class Server {
         for (ClientHandler handler : connectionsMap.values()) {
             try {
                 handler.sendMessage(message);
-                log.info("Пользователю {} отправлено сообщение.", handler.getAuthorizedUserName());
+                log.info("Пользователю {} отправлено сообщение.", handler.getUserName());
             } catch (IOException e) {
-                log.error("Ошибка при отправке сообщения пользователю " + handler.getAuthorizedUserName() + " :", e);
+                log.error("Ошибка при отправке сообщения пользователю " + handler.getUserName() + " :", e);
             }
         }
     }
 
-    boolean isNameAvailable(String userName) {
+    boolean checkName(String userName) {
         return !connectionsMap.containsKey(userName);
     }
 

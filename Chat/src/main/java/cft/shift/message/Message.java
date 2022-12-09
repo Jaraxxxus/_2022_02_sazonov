@@ -1,4 +1,4 @@
-package cft.shift;
+package cft.shift.message;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,26 +18,20 @@ public class Message implements Serializable {
     private String userName;
 
     private ZonedDateTime dateTime;
-    Message(MessageType type,String data,String userName)
-    {
+
+    public Message(MessageType type) {
+        this.type = type;
+    }
+
+    public Message(MessageType type, String userName) {
+        this.type = type;
+        this.userName = userName;
+    }
+
+    public Message(MessageType type, String data, ZonedDateTime dateTime) {
         this.type = type;
         this.data = data;
-        this.userName = userName;
-        this.dateTime = null;
-    }
-    Message(MessageType type, String userName)
-    {
-        this.type = type;
-        this.userName = userName;
-        this.data = null;
-        this.dateTime = null;
-    }
-    Message(MessageType type)
-    {
-        this.type = type;
-        this.data = null;
-        this.userName = null;
-        this.dateTime = null;
+        this.dateTime = dateTime;
     }
 
 
