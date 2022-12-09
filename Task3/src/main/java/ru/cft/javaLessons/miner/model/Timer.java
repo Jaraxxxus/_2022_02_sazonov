@@ -14,6 +14,8 @@ public class Timer implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(Timer.class);
     private int seconds = 0;
+    private long startTime = 0;
+    private long endTime = 0;
     private final ModelListener listener;
     private final ScheduledExecutorService timer = Executors.newScheduledThreadPool(1);
     private ScheduledFuture<?> scheduledFuture;
@@ -26,6 +28,8 @@ public class Timer implements Runnable {
 
     void restartTime() {
         log.info("Таймер запущен");
+        startTime = System.currentTimeMillis();
+        endTime = System.currentTimeMillis();
         seconds = 0;
         isStarted = true;
         scheduledFuture = timer.scheduleAtFixedRate(this, 1, 1, TimeUnit.SECONDS);
@@ -45,7 +49,7 @@ public class Timer implements Runnable {
 
     @Override
     public void run() {
-        seconds++;
+        seconds = (int) (startTime - endTime) / 1000000;
         listener.onTimerChange(seconds);
     }
 }
