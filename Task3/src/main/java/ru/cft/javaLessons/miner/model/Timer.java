@@ -49,7 +49,8 @@ public class Timer implements Runnable {
 
     @Override
     public void run() {
-        seconds = (int) (startTime - endTime) / 1000000;
+        endTime = System.currentTimeMillis();
+        seconds = (int) ( endTime - startTime) / 1000;
         listener.onTimerChange(seconds);
     }
 }
