@@ -28,12 +28,6 @@ public class Message implements Serializable {
         this.userName = userName;
     }
 
-    public Message(MessageType type, String data, ZonedDateTime dateTime) {
-        this.type = type;
-        this.data = data;
-        this.dateTime = dateTime;
-    }
-
 
 
 }
