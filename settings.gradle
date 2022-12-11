@@ -1,5 +1,9 @@
 rootProject.name = '_2022_02_sazonov'
 include 'Task1'
 include 'Task2'
-include 'Chat'
+include 'ChatServer'
+include ':Common'
+include 'Chat:ChatClient'
+findProject(':Chat:ChatClient')?.name = 'ChatClient'
+include 'ChatClient'
 
