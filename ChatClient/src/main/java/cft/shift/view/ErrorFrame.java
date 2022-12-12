@@ -24,7 +24,12 @@ public class ErrorFrame implements GUIFrame {
         errorLabel.setText(errorText);
     }
 
+    @Override
+    public void show() {
+        errorDialog.setVisible(true);
+    }
 
+    @Override
     public void launch() {
         Container contentPane = errorDialog.getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -67,8 +72,5 @@ public class ErrorFrame implements GUIFrame {
         UIChat.prepareDialogFrame(errorDialog);
     }
 
-    @Override
-    public void show() {
-        errorDialog.setVisible(true);
-    }
+
 }

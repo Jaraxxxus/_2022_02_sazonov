@@ -39,9 +39,9 @@ public class ConnectFailureFrame implements GUIFrame {
         });
     }
 
-    void initConnectionLostVersion() {
+    void initConnectionLost() {
         launch();
-        connectionFailureLabel.setText("Connection is lost");
+        connectionFailureLabel.setText("Connection is lost!");
 
         reconnectButton.addActionListener(e -> {
             connectionFailureDialog.dispose();

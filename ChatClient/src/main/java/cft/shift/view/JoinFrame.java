@@ -39,7 +39,13 @@ public class JoinFrame implements GUIFrame {
         cancelButton = new JButton();
     }
 
+    @Override
+    public void show() {
+        connectionDialog.setVisible(true);
+    }
 
+
+    @Override
     public void launch() {
         Container contentPane = connectionDialog.getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -133,7 +139,7 @@ public class JoinFrame implements GUIFrame {
         return e -> {
             String serverAddress = addressTextField.getText();
             if (serverAddress.trim().isEmpty()) {
-                initErrorFrame("Enter the server address");
+                showErrorFrame("Enter the server address");
                 return;
             }
             try {
@@ -141,18 +147,14 @@ public class JoinFrame implements GUIFrame {
                 connectionDialog.dispose();
                 controller.connect(serverAddress, serverPort);
             } catch (NumberFormatException ex) {
-                initErrorFrame("Incorrect port");
+                showErrorFrame("Incorrect port");
             }
         };
     }
 
-    private void initErrorFrame(String message) {
+    private void showErrorFrame(String message) {
         ErrorFrame errorWindow = new ErrorFrame(UIChat, message);
         errorWindow.show();
     }
 
-    @Override
-    public void show() {
-        connectionDialog.setVisible(true);
-    }
 }

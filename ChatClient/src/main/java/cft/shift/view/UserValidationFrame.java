@@ -39,7 +39,12 @@ public class UserValidationFrame implements GUIFrame {
 
     }
 
+    @Override
+    public void show() {
+        userAuthorizationDialog.setVisible(true);
+    }
 
+    @Override
     public void launch() {
         Container contentPane = userAuthorizationDialog.getContentPane();
         contentPane.setLayout(new BorderLayout());
@@ -118,10 +123,6 @@ public class UserValidationFrame implements GUIFrame {
         UIChat.prepareDialogFrame(userAuthorizationDialog);
     }
 
-    @Override
-    public void show() {
-        userAuthorizationDialog.setVisible(true);
-    }
 
     private ActionListener createActionListenerForOkButton() {
         return e -> {

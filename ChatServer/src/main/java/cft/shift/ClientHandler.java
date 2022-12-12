@@ -128,7 +128,7 @@ public class ClientHandler implements Runnable {
                 sendMessage(message);
             }
         }
-        log.info("Информация о пользователях онлайн отправлена пользователю {} .", userName);
+        log.info("Информация о пользователях онлайн отправлена {} .", userName);
     }
 
 
@@ -136,6 +136,8 @@ public class ClientHandler implements Runnable {
         Object obj = inputStream.readObject();
         Message message = mapper.readValue((String) obj, Message.class);
         log.info(message.toString());
+        log.info(message.getUserName() + " ," + message.getData() + ", " + message.getDateTime().toString()
+                                       + ", " + message.getType().toString());
         return message;
     }
 

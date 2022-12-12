@@ -211,7 +211,7 @@ public class UIChat implements View {
     public void offerReconnection() {
         cleanGUI();
         ConnectFailureFrame connectFailureFrame = new ConnectFailureFrame(this, controller);
-        connectFailureFrame.initConnectionLostVersion();
+        connectFailureFrame.initConnectionLost();
         connectFailureFrame.show();
     }
 

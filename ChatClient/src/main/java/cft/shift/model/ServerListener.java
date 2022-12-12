@@ -42,6 +42,8 @@ public class ServerListener implements Runnable {
         Object obj = inputStream.readObject();
         Message message = Client.mapper.readValue((String) obj, Message.class);
         log.info(message.toString());
+        log.info(message.getUserName() + " ," + message.getData() + ", " + message.getDateTime().toString()
+                                       + ", " + message.getType().toString());
         return message;
     }
 
