@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 public class Main {
     private static final Logger log = LoggerFactory.getLogger(Main.class);
 
+
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.print("Input number of calculation: ");
@@ -19,11 +20,7 @@ public class Main {
         try {
             sum = CalculateFunction.calculate(num);
         } catch (ExecutionException e) {
-
             log.error("smth went wrong " + e.getMessage());
-            return;
-        } catch (InterruptedException e) {
-            log.error("thread was interrupted " + e.getMessage());
             return;
         }
 
