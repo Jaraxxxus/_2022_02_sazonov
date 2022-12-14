@@ -21,10 +21,11 @@ public class Main {
             sum = CalculateFunction.calculate(num);
         } catch (ExecutionException e) {
             log.error("smth went wrong " + e.getMessage());
+            System.out.println("further correct work is not possible");
             return;
         }
 
-        log.info(" sum  " + sum);
+        log.info(" sum  = " + sum);
         System.out.println("result is " + sum + ", mathematical expectation = 1");
     }
 
