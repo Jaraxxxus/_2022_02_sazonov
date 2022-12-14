@@ -30,7 +30,7 @@ public class CalculateFunction {
             try {
                 sum += future.get();
             } catch (InterruptedException ignored) {
-                log.info("thread was interrupted during calculations, but brought it to the end" );
+                log.info("thread was interrupted during calculations, but brought them to the end" );
             }
         }
         long endTime = System.currentTimeMillis();
