@@ -169,7 +169,6 @@ public class UIChat implements View {
     public void sendMessage(String message) {
         textArea.append(message + System.lineSeparator());
         textArea.setCaretPosition(textArea.getDocument().getLength());
-
     }
 
     @Override

@@ -23,6 +23,5 @@ public interface View {
     void offerReconnection();
 
     void setError(String errorText);
-
 }
 

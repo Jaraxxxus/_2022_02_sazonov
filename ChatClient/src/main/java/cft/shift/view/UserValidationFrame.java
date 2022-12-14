@@ -27,16 +27,12 @@ public class UserValidationFrame implements GUIFrame {
         this.controller = controller;
         userAuthorizationDialog = new JDialog(UIChat.getMainFrame());
         dialogPane = new JPanel();
-
         contentPanel = new JPanel();
-
         userNameRequestLabel = new JLabel();
-
         userNameTextField = new JTextField();
         buttonBar = new JPanel();
         okButton = new JButton();
         cancelButton = new JButton();
-
     }
 
     @Override

@@ -41,9 +41,8 @@ public class ServerListener implements Runnable {
     private Message receiveMessageFromServer() throws IOException, ClassNotFoundException {
         Object obj = inputStream.readObject();
         Message message = Client.mapper.readValue((String) obj, Message.class);
-        log.info(message.toString());
-        log.info(message.getUserName() + " ," + message.getData() + ", " + message.getDateTime().toString()
-                                       + ", " + message.getType().toString());
+        log.info(message.toString() + " : " + message.getUserName() + " ," + message.getData() + ", "
+                + message.getDateTime().toString() + ", " + message.getType().toString() );
         return message;
     }
 
