@@ -23,14 +23,16 @@ class Server {
     private final Map<String, ClientHandler> connectionsMap;
 
     Server(Parser parser) {
-        this.threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() / 2);
+        //что бы потоки остались и на клиентов
+        int nTreads = Math.max(Runtime.getRuntime().availableProcessors() / 2, 1);
+        this.threadPool = Executors.newFixedThreadPool(nTreads);
         this.portNumber = parser.getPortNumber();
         connectionsMap = new ConcurrentHashMap<String, ClientHandler>();
     }
 
     void startServer() {
         try (ServerSocket serverSocket = new ServerSocket(portNumber)) {
-            System.out.println(portNumber);
+            System.out.println("port = " + portNumber);
             log.info("Сервер запущен, порт = " + portNumber);
             while (!Thread.currentThread().isInterrupted()) {
                 Socket clientSocket = serverSocket.accept();
@@ -41,7 +43,6 @@ class Server {
             log.error("Ошибка при работе сервера : " + e.getMessage());
         }
         shutdown();
-
     }
 
     void sendBroadcastMessage(Message message) {

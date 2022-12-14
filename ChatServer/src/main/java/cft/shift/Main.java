@@ -14,7 +14,6 @@ public class Main {
             Parser parser = new Parser();
             Server server = new Server(parser);
             server.startServer();
-
         } catch (NumberFormatException | IOException e) {
             log.error(e.getMessage());
         }
