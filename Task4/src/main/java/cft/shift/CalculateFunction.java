@@ -32,7 +32,7 @@ public class CalculateFunction {
         long endTime = System.currentTimeMillis();
         log.info("Calculation of the sum of  1/(N(N+1)) in " + (endTime - startTime) +
                 " milliseconds.");
-
+        pool.shutdown();
         return sum;
     }
 }
