@@ -23,8 +23,7 @@ class Server {
     private final Map<String, ClientHandler> connectionsMap;
 
     Server(Parser parser) {
-        //что бы потоки остались и на клиентов
-        int nTreads = Math.max(Runtime.getRuntime().availableProcessors() / 2, 1);
+        int nTreads = Runtime.getRuntime().availableProcessors() ;
         this.threadPool = Executors.newFixedThreadPool(nTreads);
         this.portNumber = parser.getPortNumber();
         connectionsMap = new ConcurrentHashMap<String, ClientHandler>();
