@@ -20,8 +20,9 @@ public class Main {
         try {
             sum = CalculateFunction.calculate(num);
         } catch (ExecutionException e) {
-            log.error("smth went wrong " + e.getMessage());
-            System.out.println("smth went wrong :" + e.getMessage() + "; further correct work is not possible");
+            log.error("smth went wrong " + e.getCause().getMessage());
+            System.out.println("smth went wrong :" + e.getCause().getMessage()
+                             + "; further correct work is not possible");
             return;
         }
 
