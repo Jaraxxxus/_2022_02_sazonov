@@ -2,37 +2,37 @@ package cft.shift;
 
 public class Task1 {
 
-    static final int EXPECTED_BUFFER_CAPACITY = 170;
+
     public static void printTable(int tableSize)
     {
 
-        int factorLength = findLength(tableSize);
+        int multLength = findLength(tableSize);
         int fieldLength = findLength(tableSize*tableSize);
-        int factor = 1;
+        int mult = 1;
 
-        String delimiter = createDelimiter(factorLength,tableSize,fieldLength);
+        String delimiter = createDelimiter(multLength,tableSize,fieldLength);
 
-        System.out.print(editField(factorLength));
-        System.out.println( fillRow(factor, tableSize, fieldLength));
+        System.out.print(editField(multLength));
+        System.out.println( fillRow(mult, tableSize, fieldLength));
         System.out.println(delimiter);
 
-        while(factor<=tableSize)
+        while(mult<=tableSize)
         {
 
-            System.out.print(editField(factor, factorLength));
-            System.out.println( fillRow(factor, tableSize, fieldLength));
+            System.out.print(editField(mult, multLength));
+            System.out.println( fillRow(mult, tableSize, fieldLength));
             System.out.println(delimiter);
-            ++factor;
+            mult++;
 
         }
     }
 
 
 
-    private static String createDelimiter(int factorLength, int tableSize,int fieldLength)
+    private static String createDelimiter(int multLength, int tableSize,int fieldLength)
     {
-        StringBuilder buf = new StringBuilder(EXPECTED_BUFFER_CAPACITY);
-        buf.append("-".repeat(Math.max(0, factorLength)));
+        StringBuilder buf = new StringBuilder();
+        buf.append("-".repeat(Math.max(0, multLength)));
 
         for (int i = 0 ;i < tableSize; ++i)
         {
@@ -49,29 +49,29 @@ public class Task1 {
     }
 
 
-    private static String editField(int curFactor, int factorLength)
+    private static String editField(int curMultiplayer, int multLength)
     {
-        int spaceLength = factorLength - findLength(curFactor) ;
-        StringBuilder buf = new StringBuilder(EXPECTED_BUFFER_CAPACITY);
-        buf.append(" ".repeat(Math.max(0, spaceLength))).append(curFactor);
+        int spaceLength = multLength - findLength(curMultiplayer) ;
+        StringBuilder buf = new StringBuilder();
+        buf.append(" ".repeat(Math.max(0, spaceLength))).append(curMultiplayer);
         return buf.toString();
 
     }
-    private static String editField( int factorLength)
+    private static String editField( int multLength)
     {
         StringBuilder curBuf = new StringBuilder();
-        curBuf.append(" ".repeat(Math.max(0, factorLength)));
+        curBuf.append(" ".repeat(Math.max(0, multLength)));
         return curBuf.toString();
     }
-    private static String fillRow(int curProduct, int tableSize, int fieldLength)
+    private static String fillRow(int curNum, int tableSize, int fieldLength)
     {
-        StringBuilder curBuf = new StringBuilder(EXPECTED_BUFFER_CAPACITY);
-        int curFactor = curProduct;
+        StringBuilder curBuf = new StringBuilder();
+        int curMult = curNum;
         for (int i = 0 ;i < tableSize; ++i)
         {
-            int spaceLength = fieldLength - findLength(curProduct);
-            curBuf.append("|").append(" ".repeat(Math.max(0, spaceLength))).append(curProduct);
-            curProduct+=curFactor;
+            int spaceLength = fieldLength - findLength(curNum);
+            curBuf.append("|").append(" ".repeat(Math.max(0, spaceLength))).append(curNum);
+            curNum+=curMult;
         }
         return curBuf.toString();
 
