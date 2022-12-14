@@ -21,7 +21,7 @@ public class Main {
             sum = CalculateFunction.calculate(num);
         } catch (ExecutionException e) {
             log.error("smth went wrong " + e.getMessage());
-            System.out.println("further correct work is not possible");
+            System.out.println("smth went wrong :" + e.getMessage() + "; further correct work is not possible");
             return;
         }
 
