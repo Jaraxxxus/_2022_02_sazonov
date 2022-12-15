@@ -7,17 +7,14 @@ public class View implements ModelListener {
 
     private final MainWindow mainWindow;
     private final WinWindow winWindow;
-
     private final LoseWindow loseWindow;
     private final HighScoresWindow highScoresWindow;
     private final SettingsWindow settingsWindow;
-
     private final RecordsWindow recordWindow;
 
     private GameController control;
 
     public View() {
-
         mainWindow = new MainWindow();
         settingsWindow = new SettingsWindow(mainWindow);
         mainWindow.setSettingsMenuAction(e -> settingsWindow.setVisible(true));
@@ -32,7 +29,7 @@ public class View implements ModelListener {
         start(GameType.NOVICE);
     }
 
-    public void setListener(GameController control){
+    public void setListener(GameController control) {
         this.control = control;
         winWindow.setNewGameListener(control);
         recordWindow.setNameListener(control);
