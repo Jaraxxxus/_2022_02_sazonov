@@ -7,31 +7,36 @@ public class View implements ModelListener {
 
     private final MainWindow mainWindow;
     private final WinWindow winWindow;
-    private final GameController control;
+
     private final LoseWindow loseWindow;
     private final HighScoresWindow highScoresWindow;
     private final SettingsWindow settingsWindow;
 
     private final RecordsWindow recordWindow;
 
-    public View(GameController control) {
-        this.control = control;
+    private GameController control;
+
+    public View() {
+
         mainWindow = new MainWindow();
         settingsWindow = new SettingsWindow(mainWindow);
         mainWindow.setSettingsMenuAction(e -> settingsWindow.setVisible(true));
         highScoresWindow = new HighScoresWindow(mainWindow);
         mainWindow.setHighScoresMenuAction(e -> highScoresWindow.setVisible(true));
         mainWindow.setExitMenuAction(e -> mainWindow.dispose());
-        mainWindow.setNewGameMenuAction(e -> control.startNewGame());
         winWindow = new WinWindow(mainWindow);
         loseWindow = new LoseWindow(mainWindow);
         loseWindow.setExitListener(e -> mainWindow.dispose());
         winWindow.setExitListener(e -> mainWindow.dispose());
-        winWindow.setNewGameListener(control);
-
         recordWindow = new RecordsWindow(mainWindow);
-        recordWindow.setNameListener(control);
         start(GameType.NOVICE);
+    }
+
+    public void setListener(GameController control){
+        this.control = control;
+        winWindow.setNewGameListener(control);
+        recordWindow.setNameListener(control);
+        mainWindow.setNewGameMenuAction(e -> control.startNewGame());
     }
 
 

@@ -9,11 +9,12 @@ import ru.cft.javaLessons.miner.view.View;
 public class Application {
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     public static void main(String[] args) {
-        SupperModel mod = new SupperModel();
-        GameController gameControl = new GameController(mod);
-        View view = new View(gameControl);
-        mod.setModelListener(view);
-        mod.startGame(GameType.NOVICE);
+        SupperModel model = new SupperModel();
+        GameController gameControl = new GameController(model);
+        View view = new View();
+        view.setListener(gameControl);
+        model.setModelListener(view);
+        model.startGame(GameType.NOVICE);
         log.info("Игра запущена");
     }
 
