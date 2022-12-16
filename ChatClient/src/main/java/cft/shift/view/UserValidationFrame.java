@@ -1,6 +1,6 @@
 package cft.shift.view;
 
-import cft.shift.controller.Controller;
+import cft.shift.controller.ModelControllerInterface;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -11,7 +11,7 @@ import java.awt.event.WindowAdapter;
 public class UserValidationFrame implements GUIFrame {
 
     private final UIChat UIChat;
-    private final Controller controller;
+    private final ModelControllerInterface controller;
     private final JDialog userAuthorizationDialog;
     private final JPanel dialogPane;
     private final JPanel contentPanel;
@@ -22,7 +22,7 @@ public class UserValidationFrame implements GUIFrame {
     private final JButton okButton;
     private final JButton cancelButton;
 
-    UserValidationFrame(UIChat UIChat, Controller controller) {
+    UserValidationFrame(UIChat UIChat, ModelControllerInterface controller) {
         this.UIChat = UIChat;
         this.controller = controller;
         userAuthorizationDialog = new JDialog(UIChat.getMainFrame());

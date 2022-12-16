@@ -1,6 +1,6 @@
 package cft.shift.view;
 
-import cft.shift.controller.Controller;
+import cft.shift.controller.ModelControllerInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class UIChat implements View {
 
-    private final Controller controller;
+    private final ModelControllerInterface controller;
     private final JFrame mainFrame;
     private final JLabel nameLabel;
     private final JLabel onlineLabel;
@@ -27,7 +27,7 @@ public class UIChat implements View {
 
     private GroupLayout groupLayout;
 
-    public UIChat(Controller controller) {
+    public UIChat(ModelControllerInterface controller) {
         this.controller = controller;
 
         mainFrame = new JFrame();

@@ -1,6 +1,6 @@
 package cft.shift.view;
 
-import cft.shift.controller.Controller;
+import cft.shift.controller.ModelControllerInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +16,9 @@ public class ConnectFailureFrame implements GUIFrame {
     private final JLabel connectionFailureLabel;
 
     private final UIChat UIChat;
-    private final Controller controller;
+    private final ModelControllerInterface controller;
 
-    ConnectFailureFrame(UIChat UIChat, Controller controller) {
+    ConnectFailureFrame(UIChat UIChat, ModelControllerInterface controller) {
         this.UIChat = UIChat;
         this.controller = controller;
         connectionFailureDialog = new JDialog(UIChat.getMainFrame());

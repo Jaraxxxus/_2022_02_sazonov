@@ -1,6 +1,6 @@
 package cft.shift.controller;
 
-public interface Controller {
+public interface ModelControllerInterface {
 
     void connect(String serverAddress, int serverPort);
 

@@ -2,7 +2,7 @@ package cft.shift.view;
 
 //import org.apache.commons.lang3.StringUtils;
 
-import cft.shift.controller.Controller;
+import cft.shift.controller.ModelControllerInterface;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -22,9 +22,9 @@ public class JoinFrame implements GUIFrame {
     private final JButton okButton;
     private final JButton cancelButton;
     private final UIChat UIChat;
-    private final Controller controller;
+    private final ModelControllerInterface controller;
 
-    JoinFrame(UIChat UIChat, Controller controller) {
+    JoinFrame(UIChat UIChat, ModelControllerInterface controller) {
         this.UIChat = UIChat;
         this.controller = controller;
         connectionDialog = new JDialog(UIChat.getMainFrame());

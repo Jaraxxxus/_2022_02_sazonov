@@ -3,7 +3,7 @@ package cft.shift.controller;
 import cft.shift.model.Client;
 
 
-public class ChatController implements Controller {
+public class ChatController implements ModelControllerInterface {
 
     private final Client client;
 

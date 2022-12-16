@@ -1,6 +1,6 @@
 package cft.shift.model;
 
-import cft.shift.view.View;
+import cft.shift.controller.ViewController;
 import cft.shift.message.Message;
 import cft.shift.message.MessageType;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -21,7 +21,8 @@ import java.util.concurrent.Executors;
 public class Client {
 
     public static ObjectMapper mapper;
-    View view;
+    //View view;
+    ViewController viewController;
     private Socket socket;
     private ExecutorService serverListener;
     private ObjectOutputStream outputStream;
@@ -55,7 +56,8 @@ public class Client {
             if (isUserNameWasValidated) {
                 registration(userName);
             } else {
-                view.requestName();
+                //view.requestName();
+                viewController.onRequestName();
             }
         } catch (IOException e) {
             log.error("Ошибка при установке соединения : " + e.getMessage());
@@ -63,7 +65,8 @@ public class Client {
             if (isConnectionCloseRequired()) {
                 closeConnection();
             }
-            view.connectionFailureMessage(isUserNameWasValidated);
+            //view.connectionFailureMessage(isUserNameWasValidated);
+            viewController.onFailureConnect(isUserNameWasValidated);
         }
     }
 
@@ -83,12 +86,13 @@ public class Client {
     }
 
 
-    public void setChatView(View view) {
-        this.view = view;
+    public void setChatView(ViewController viewController) {
+        this.viewController = viewController;
+        //this.view = view;
     }
 
     public void startChatView() {
-        view.launch();
+        viewController.onStartChat();
     }
 
     public void connect(String host, int port) {
@@ -102,12 +106,14 @@ public class Client {
 
     private void initServerListener() {
         serverListener = Executors.newSingleThreadExecutor();
-        serverListener.submit(new ServerListener(inputStream, this, view));
+        serverListener.submit(new ServerListener(inputStream, this, viewController));
+        //serverListener.submit(new ServerListener(inputStream, this, view));
     }
 
     void processSuccessAuthentication() {
         isUserNameWasValidated = true;
-        view.validationMessage(userName);
+        viewController.onValidate(userName);
+        //view.validationMessage(userName);
     }
 
 
@@ -120,7 +126,8 @@ public class Client {
     public void sendChatMessage(String text) {
         if (!isConnectionAlive) {
             log.error("Попытка отправить сообщение без соединения с сервером");
-            view.setError("Connect to the server first!");
+            //view.setError("Connect to the server first!");
+            viewController.onSetError("Connect to the server first!");
             return;
         }
         try {
@@ -134,7 +141,8 @@ public class Client {
         if (isConnectionCloseRequired()) {
             log.error("Соединение с сервером потеряно : ", e);
             closeConnection();
-            view.offerReconnection();
+            viewController.onOfferReconnect();
+            //view.offerReconnection();
         }
     }
 
@@ -171,7 +179,8 @@ public class Client {
 
     public void clientCloseRequest() {
         disconnect();
-        view.dispose();
+        viewController.onDispose();
+        //view.dispose();
     }
 
     public void disconnect() {
