@@ -153,7 +153,7 @@ public class UIChat implements View {
 
     @Override
     public void nameDeclined() {
-        ErrorFrame errorWindow = new ErrorFrame(this, "User ith this name already exist!");
+        ErrorFrame errorWindow = new ErrorFrame(this, "This user name already exist!");
         errorWindow.show();
         requestName();
     }

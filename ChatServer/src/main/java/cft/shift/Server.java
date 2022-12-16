@@ -23,8 +23,7 @@ class Server {
     private final Map<String, ClientHandler> connectionsMap;
 
     Server(int port) {
-        int nTreads = Runtime.getRuntime().availableProcessors() ;
-        this.threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() / 2);
+        this.threadPool = Executors.newCachedThreadPool();
         this.portNumber = port;
         connectionsMap = new ConcurrentHashMap<String, ClientHandler>();
     }
@@ -48,9 +47,9 @@ class Server {
         for (ClientHandler handler : connectionsMap.values()) {
             try {
                 handler.sendMessage(message);
-                log.info("Пользователем {} было отправлено сообщение.", handler.getUserName());
+                log.info("Пользователю {} было отправлено сообщение.", handler.getUserName());
             } catch (IOException e) {
-                log.error("Ошибка при отправке сообщения пользователем " + handler.getUserName() + " :", e);
+                log.error("Ошибка при отправке сообщения пользователю " + handler.getUserName() + " :", e);
             }
         }
     }

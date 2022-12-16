@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.time.ZonedDateTime;
 
 @Slf4j
 public class ClientHandler implements Runnable {
@@ -43,11 +44,12 @@ public class ClientHandler implements Runnable {
             inputStream = new ObjectInputStream(clientSocket.getInputStream());
             registrationUser();
             if (isNameAccepted) {
-                addUserToChat();
+                maintainingUserConnection();
             } else {
                 sendMessage(new Message(MessageType.NAME_DECLINED));
+
             }
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (Throwable e) {
             log.error("Ошибка при работе с клиентом " + clientSocket.getRemoteSocketAddress() +
                     ". Сокет с клиентом будет закрыт.", e);
         } finally {
@@ -58,10 +60,10 @@ public class ClientHandler implements Runnable {
     }
 
 
-    private void addUserToChat() throws IOException, ClassNotFoundException {
+    private void maintainingUserConnection() throws IOException, ClassNotFoundException {
         sendMessage(new Message(MessageType.NAME_ACCEPTED));
         server.newUser(userName, this);
-        server.sendBroadcastMessage(new Message(MessageType.NEW_USER, userName));
+        server.sendBroadcastMessage(new Message(MessageType.NEW_USER, null, userName, ZonedDateTime.now()));
         sendCurUserList();
         startClientListener();
     }
@@ -92,8 +94,8 @@ public class ClientHandler implements Runnable {
         server.sendBroadcastMessage(new Message(MessageType.DISCONNECT, userName));
     }
 
-    private void registrationUser() { //throws IOException, ClassNotFoundException
-        Message request = null;
+    private void registrationUser() throws IOException, ClassNotFoundException {
+        Message request;
         request = getMessage();
         MessageType type = request.getType();
         log.info("Получен запрос из сокета клиента {} с типом {} .",
@@ -120,6 +122,7 @@ public class ClientHandler implements Runnable {
         } else {
             log.info("Сервер не авторизовал пользователя с ником {}. Такой пользователь уже есть в чате.",
                     userName);
+
         }
     }
 
@@ -135,21 +138,13 @@ public class ClientHandler implements Runnable {
     }
 
 
-    private Message getMessage()  {//throws IOException, ClassNotFoundException
-        Object obj = null;
-        Message message = null;
-        try {
-            obj = inputStream.readObject();
-            message = mapper.readValue((String) obj, Message.class);
-            log.info(message.toString());
-            log.info(message.getUserName() + " ," + message.getData() + ", " + message.getDateTime().toString()
-                    + ", " + message.getType().toString());
+    private Message getMessage() throws IOException, ClassNotFoundException {//
+        Object obj = inputStream.readObject();
+        Message message = mapper.readValue((String) obj, Message.class);
+        log.info(message.toString());
+        log.info(message.getUserName() + " ," + message.getData()
+                + ", " + message.getType().toString());
 
-
-        } catch (IOException | ClassNotFoundException e) {
-            //TODO
-            throw new RuntimeException(e);
-        }
         return message;
     }
 
