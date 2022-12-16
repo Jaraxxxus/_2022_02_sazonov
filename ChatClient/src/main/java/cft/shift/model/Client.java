@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
 public class Client {
 
     public static ObjectMapper mapper;
-    private View view;
+    View view;
     private Socket socket;
     private ExecutorService serverListener;
     private ObjectOutputStream outputStream;
@@ -130,7 +130,7 @@ public class Client {
         }
     }
 
-    void processConnectionProblems(Exception e) {
+    void processConnectionProblems(Throwable e) {
         if (isConnectionCloseRequired()) {
             log.error("Соединение с сервером потеряно : ", e);
             closeConnection();
