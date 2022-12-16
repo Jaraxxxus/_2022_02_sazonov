@@ -21,7 +21,6 @@ import java.util.concurrent.Executors;
 public class Client {
 
     public static ObjectMapper mapper;
-    //View view;
     ViewController viewController;
     private Socket socket;
     private ExecutorService serverListener;
@@ -56,7 +55,6 @@ public class Client {
             if (isUserNameWasValidated) {
                 registration(userName);
             } else {
-                //view.requestName();
                 viewController.onRequestName();
             }
         } catch (IOException e) {
@@ -65,7 +63,6 @@ public class Client {
             if (isConnectionCloseRequired()) {
                 closeConnection();
             }
-            //view.connectionFailureMessage(isUserNameWasValidated);
             viewController.onFailureConnect(isUserNameWasValidated);
         }
     }
@@ -107,13 +104,12 @@ public class Client {
     private void initServerListener() {
         serverListener = Executors.newSingleThreadExecutor();
         serverListener.submit(new ServerListener(inputStream, this, viewController));
-        //serverListener.submit(new ServerListener(inputStream, this, view));
+
     }
 
     void processSuccessAuthentication() {
         isUserNameWasValidated = true;
         viewController.onValidate(userName);
-        //view.validationMessage(userName);
     }
 
 
@@ -126,7 +122,6 @@ public class Client {
     public void sendChatMessage(String text) {
         if (!isConnectionAlive) {
             log.error("Попытка отправить сообщение без соединения с сервером");
-            //view.setError("Connect to the server first!");
             viewController.onSetError("Connect to the server first!");
             return;
         }
@@ -142,7 +137,6 @@ public class Client {
             log.error("Соединение с сервером потеряно : ", e);
             closeConnection();
             viewController.onOfferReconnect();
-            //view.offerReconnection();
         }
     }
 
@@ -180,7 +174,6 @@ public class Client {
     public void clientCloseRequest() {
         disconnect();
         viewController.onDispose();
-        //view.dispose();
     }
 
     public void disconnect() {

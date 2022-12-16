@@ -4,6 +4,7 @@ import cft.shift.view.View;
 
 public class ViewController implements ViewControllerInterface {
     private final View view;
+
     public ViewController(View view) {
         this.view = view;
     }

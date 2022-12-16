@@ -17,7 +17,6 @@ public class Main {
         ModelControllerInterface controller = new ChatController(client);
         View chatView = new UIChat(controller);
         ViewController viewController = new ViewController(chatView);
-        //client.setChatView(chatView);
         client.setChatView(viewController);
         SwingUtilities.invokeLater(client::startChatView);
     }

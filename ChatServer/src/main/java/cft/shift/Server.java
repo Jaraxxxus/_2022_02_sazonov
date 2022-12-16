@@ -47,9 +47,9 @@ class Server {
         for (ClientHandler handler : connectionsMap.values()) {
             try {
                 handler.sendMessage(message);
-                log.info("Пользователю {} было отправлено сообщение.", handler.getUserName());
+                log.info("Пользователем {} было отправлено сообщение.", handler.getUserName());
             } catch (IOException e) {
-                log.error("Ошибка при отправке сообщения пользователю " + handler.getUserName() + " :", e);
+                log.error("Ошибка при отправке сообщения пользователя " + handler.getUserName() + " :", e);
             }
         }
     }

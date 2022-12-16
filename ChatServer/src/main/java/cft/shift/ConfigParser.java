@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class ConfigParser {
 
-    public static int  getPortNumber() throws IOException {
+    public static int getPortNumber() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(ConfigParser.class.
                 getResourceAsStream("/config.properties"))));
         Properties properties = new Properties();
