@@ -12,7 +12,8 @@ import java.util.concurrent.Future;
 
 public class CalculateFunction {
     private static final Logger log = LoggerFactory.getLogger(CalculateFunction.class);
-    public static double calculate(int num) throws ExecutionException {
+
+    public static double calculate(int num) throws ExecutionException, InterruptedException {
         int processors = Runtime.getRuntime().availableProcessors();
         double sum = 0;
 
@@ -27,11 +28,7 @@ public class CalculateFunction {
             set.add(future);
         }
         for (Future<Double> future : set) {
-            try {
-                sum += future.get();
-            } catch (InterruptedException ignored) {
-                log.info("thread was interrupted during calculations, but brought them to the end" );
-            }
+            sum += future.get();
         }
         long endTime = System.currentTimeMillis();
         log.info("Calculation of the sum of  1/(N(N+1)) in " + (endTime - startTime) +

@@ -16,12 +16,15 @@ public class Main {
         int num = in.nextInt();
         double sum;
         log.info("calculation started");
-
         try {
             sum = CalculateFunction.calculate(num);
-        } catch (ExecutionException e) {
+        }catch (InterruptedException e) {
+            log.error("Thread was interrupted during calculations " + e.getMessage());
+            System.out.println("Thread was interrupted during calculations, further correct work is not possible");
+            return;
+        }catch (ExecutionException e) {
             log.error("smth went wrong " + e.getCause().getMessage());
-            System.out.println("smth went wrong :" + e.getCause().getMessage()
+            System.out.println("smth went wrong :" + e.getMessage()
                              + "; further correct work is not possible");
             return;
         }

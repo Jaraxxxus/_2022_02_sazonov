@@ -20,11 +20,16 @@ public class Task implements Callable<Double> {
     }
 
     @Override
-    public Double call() {
+    public Double call() throws InterruptedException {
         for (int n = nStart; n <= nEnd; n = n + nStep) {
             long divider = (long) n * (n + 1);
             nResult += 1. / divider;
             log.info("Cur step = " + n + ", cur result =" + nResult);
+            if (Thread.currentThread().isInterrupted())
+            {
+                log.info("I was interrupted, cur step is " + nStep);
+                throw new InterruptedException();
+            }
         }
         return nResult;
     }
