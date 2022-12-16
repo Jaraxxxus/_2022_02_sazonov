@@ -22,10 +22,10 @@ class Server {
     private final int portNumber;
     private final Map<String, ClientHandler> connectionsMap;
 
-    Server(Parser parser) {
+    Server(int port) {
         int nTreads = Runtime.getRuntime().availableProcessors() ;
-        this.threadPool = Executors.newFixedThreadPool(nTreads);
-        this.portNumber = parser.getPortNumber();
+        this.threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors() / 2);
+        this.portNumber = port;
         connectionsMap = new ConcurrentHashMap<String, ClientHandler>();
     }
 

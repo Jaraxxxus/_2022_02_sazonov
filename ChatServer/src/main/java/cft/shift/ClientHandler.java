@@ -92,8 +92,9 @@ public class ClientHandler implements Runnable {
         server.sendBroadcastMessage(new Message(MessageType.DISCONNECT, userName));
     }
 
-    private void registrationUser() throws IOException, ClassNotFoundException {
-        Message request = getMessage();
+    private void registrationUser() { //throws IOException, ClassNotFoundException
+        Message request = null;
+        request = getMessage();
         MessageType type = request.getType();
         log.info("Получен запрос из сокета клиента {} с типом {} .",
                 clientSocket.getRemoteSocketAddress(), type);
@@ -107,6 +108,8 @@ public class ClientHandler implements Runnable {
                             "Соединение будет закрыто.", clientSocket.getRemoteSocketAddress(), type,
                     MessageType.REGISTRATION);
         }
+
+
     }
 
     private void checkUserName(String userName) {
@@ -132,12 +135,21 @@ public class ClientHandler implements Runnable {
     }
 
 
-    private Message getMessage() throws IOException, ClassNotFoundException {
-        Object obj = inputStream.readObject();
-        Message message = mapper.readValue((String) obj, Message.class);
-        log.info(message.toString());
-        log.info(message.getUserName() + " ," + message.getData() + ", " + message.getDateTime().toString()
-                                       + ", " + message.getType().toString());
+    private Message getMessage()  {//throws IOException, ClassNotFoundException
+        Object obj = null;
+        Message message = null;
+        try {
+            obj = inputStream.readObject();
+            message = mapper.readValue((String) obj, Message.class);
+            log.info(message.toString());
+            log.info(message.getUserName() + " ," + message.getData() + ", " + message.getDateTime().toString()
+                    + ", " + message.getType().toString());
+
+
+        } catch (IOException | ClassNotFoundException e) {
+            //TODO
+            throw new RuntimeException(e);
+        }
         return message;
     }
 
