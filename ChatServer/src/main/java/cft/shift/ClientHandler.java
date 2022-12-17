@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -47,7 +48,7 @@ public class ClientHandler implements Runnable {
                 maintainingUserConnection();
             } else {
                 sendMessage(new Message(MessageType.NAME_DECLINED));
-
+                outputStream.reset();
             }
         } catch (Throwable e) {
             log.error("Ошибка при работе с клиентом " + clientSocket.getRemoteSocketAddress() +
@@ -70,20 +71,29 @@ public class ClientHandler implements Runnable {
 
     private void startClientListener() throws IOException, ClassNotFoundException {
         while (!Thread.currentThread().isInterrupted()) {
-            Message request = getMessage();
-            MessageType type = request.getType();
-            if (type == MessageType.DEFAULT_MESSAGE) {
-                server.sendBroadcastMessage(new Message(MessageType.DEFAULT_MESSAGE,
-                        request.getData(), userName, request.getDateTime()));
-            } else if (type == MessageType.DISCONNECT) {
-                log.info("Получен запрос на закрытие соединения: пользователь - {} .Обработчик будет остановлен",
-                        userName);
-                break;
-            } else {
-                log.error("Неверный тип запроса, полученный с адреса {} - {} . Ожидаемые типы запроса - {}, {}.",
-                        clientSocket.getRemoteSocketAddress(), type,
-                        MessageType.DEFAULT_MESSAGE, MessageType.DISCONNECT);
+            try
+            {
+                Message request = getMessage();
+                MessageType type = request.getType();
+
+                if (type == MessageType.DEFAULT_MESSAGE) {
+                    server.sendBroadcastMessage(new Message(MessageType.DEFAULT_MESSAGE,
+                            request.getData(), userName, request.getDateTime()));
+                } else if (type == MessageType.DISCONNECT) {
+
+                    log.info("Получен запрос на закрытие соединения: пользователь - {} .Обработчик будет остановлен",
+                            userName);
+                    break;
+                } else {
+
+                    log.error("Неверный тип запроса, полученный с адреса {} - {} . Ожидаемые типы запроса - {}, {}.",
+                            clientSocket.getRemoteSocketAddress(), type,
+                            MessageType.DEFAULT_MESSAGE, MessageType.DISCONNECT);
+                }
+            } catch (EOFException ex){
+
             }
+
         }
     }
 
@@ -123,6 +133,7 @@ public class ClientHandler implements Runnable {
             log.info("Сервер не авторизовал пользователя с ником {}. Такой пользователь уже есть в чате.",
                     userName);
 
+
         }
     }
 
@@ -138,7 +149,7 @@ public class ClientHandler implements Runnable {
     }
 
 
-    private Message getMessage() throws IOException, ClassNotFoundException {//
+    private Message getMessage() throws IOException, ClassNotFoundException {
         Object obj = inputStream.readObject();
         Message message = mapper.readValue((String) obj, Message.class);
         log.info(message.toString());

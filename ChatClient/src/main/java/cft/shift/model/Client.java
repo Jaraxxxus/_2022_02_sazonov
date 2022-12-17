@@ -85,7 +85,6 @@ public class Client {
 
     public void setChatView(ViewController viewController) {
         this.viewController = viewController;
-        //this.view = view;
     }
 
     public void startChatView() {
@@ -97,7 +96,10 @@ public class Client {
     }
 
     public void reconnect() {
-        setConnection(host, port);
+        if(!isConnectionAlive) {
+            setConnection(host, port);
+            isConnectionAlive = true;
+        }
     }
 
 
@@ -145,6 +147,7 @@ public class Client {
         synchronized (lock) {
             if (isConnectionAlive) {
                 isConnectionAlive = false;
+
                 return true;
             }
             return false;
@@ -181,5 +184,9 @@ public class Client {
             sendDisconnectRequest();
             closeConnection();
         }
+    }
+
+    public String getUserName() {
+        return userName;
     }
 }

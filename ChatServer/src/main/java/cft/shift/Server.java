@@ -55,6 +55,7 @@ class Server {
     }
 
     boolean checkName(String userName) {
+        log.info("connectionsMap.containsKey(userName) " + userName + " " + !connectionsMap.containsKey(userName));
         return !connectionsMap.containsKey(userName);
     }
 
@@ -63,6 +64,7 @@ class Server {
     }
 
     void deleteUser(String newName) {
+        log.info("connectionsMap.remove " + newName);
         connectionsMap.remove(newName);
     }
 

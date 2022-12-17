@@ -54,7 +54,7 @@ public class ServerListener implements Runnable {
         MessageType type = response.getType();
         switch (type) {
             case NAME_ACCEPTED -> chatClient.processSuccessAuthentication();
-            case NAME_DECLINED -> viewController.onNameDeclined();
+            case NAME_DECLINED ->  viewController.onNameDeclined();
             case DEFAULT_MESSAGE -> viewController.onSend(formatter.formatChatMessage(response));
             case NEW_USER -> viewController.onEvent(response.getUserName());
             case DISCONNECT -> viewController.onDisconnected(response.getUserName());
