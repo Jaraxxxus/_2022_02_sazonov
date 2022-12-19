@@ -27,13 +27,18 @@ public class CalculateFunction {
             Future<Double> future = pool.submit(task);
             set.add(future);
         }
-        for (Future<Double> future : set) {
-            sum += future.get();
+        try {
+            for (Future<Double> future : set) {
+                sum += future.get();
+            }
+        }
+        finally {
+            pool.shutdown();
         }
         long endTime = System.currentTimeMillis();
         log.info("Calculation of the sum of  1/(N(N+1)) in " + (endTime - startTime) +
                 " milliseconds.");
-        pool.shutdown();
+
         return sum;
     }
 }
